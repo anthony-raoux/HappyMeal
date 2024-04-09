@@ -49,28 +49,32 @@
           <i class="bi bi-search" data-bs-toggle="modal" data-bs-target="#modalDeRecherche"></i>
         </div>
         
-        
-        <!-- Bar de recherche -->
-        <!-- <div class="d-flex justify-content-center align-items-center gap-3">
-          <input type="text" id="myInput" class="form-control" placeholder="Recherche...">
-          <button class="btn btn-outline-secondary" type="button" id="searchButton">Rechercher</button>
-        </div> -->
-        
-        
       </div>
     </div>
   </nav>
 </header>
 <body>
-    <div id="details-recette">
-        <!-- Les détails de la recette sélectionnée seront affichés ici -->
-    </div>
 
+    <div class="container" style="margin-top: 150px;">
+        <div id="details-recette">
+            <img id="image-recette" alt="Image de la recette" width="auto" height="250px">
+            <h2 id="nom-recette"></h2>
+            <p><strong>Catégorie :</strong> <span id="categorie"></span></p>
+            <p><strong>Temps de préparation :</strong> <span id="temps-preparation"></span></p>
+            <h3>Ingrédients :</h3>
+            <ul id="liste-ingredients"></ul>
+            <h3>Étapes :</h3>
+            <ol id="liste-etapes"></ol>
+        </div>
+    </div>
+    
+    
     <script>
-        // Fonction pour obtenir les paramètres de l'URL
+// Fonction pour obtenir les paramètres de l'URL
 function obtenirParametresUrl() {
     const params = new URLSearchParams(window.location.search);
     const recette = {
+        image: params.get('image'),
         nom: params.get('nom'),
         categorie: params.get('categorie'),
         temps_preparation: params.get('temps_preparation'),
@@ -83,27 +87,39 @@ function obtenirParametresUrl() {
 // Fonction pour afficher les détails de la recette
 function afficherDetailsRecette() {
     const recette = obtenirParametresUrl();
-    const detailsRecette = document.getElementById('details-recette');
-    detailsRecette.innerHTML = `
-        <h2>${recette.nom}</h2>
-        <p><strong>Catégorie :</strong> ${recette.categorie}</p>
-        <p><strong>Temps de préparation :</strong> ${recette.temps_preparation}</p>
-        <h3>Ingrédients :</h3>
-        <ul>
-            ${recette.ingredients.map(ingredient => `<li>${ingredient.nom} : ${ingredient.quantite}</li>`).join('')}
-        </ul>
-        <h3>Étapes :</h3>
-        <ol>
-            ${recette.etapes.map(etape => `<li>${etape}</li>`).join('')}
-        </ol>
-    `;
+       // Supposez que le fichier JavaScript est dans le même dossier que le fichier HTML
+    const cheminImage = './Images';
+    
+    // Injection des informations dans les éléments HTML correspondants
+    // document.getElementById('image-recette').innerHTML = recette.image;
+    document.getElementById('nom-recette').textContent = recette.nom;
+    document.getElementById('categorie').textContent = recette.categorie;
+    document.getElementById('temps-preparation').textContent = recette.temps_preparation;
+
+ 
+
+// Ensuite, vous pouvez attribuer ce chemin à la source de l'image
+document.getElementById('image-recette').src = cheminImage;
+
+
+    const listeIngredients = document.getElementById('liste-ingredients');
+    recette.ingredients.forEach(ingredient => {
+        const li = document.createElement('li');
+        li.textContent = `${ingredient.nom} : ${ingredient.quantite}`;
+        listeIngredients.appendChild(li);
+    });
+
+    const listeEtapes = document.getElementById('liste-etapes');
+    recette.etapes.forEach(etape => {
+        const li = document.createElement('li');
+        li.textContent = etape;
+        listeEtapes.appendChild(li);
+    });
 }
 
 // Appel de la fonction pour afficher les détails de la recette au chargement de la page
 afficherDetailsRecette();
-
     </script>
-    <script src="./recettes.js"></script>
 </body>
 </html>
 

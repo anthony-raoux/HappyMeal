@@ -171,7 +171,7 @@
                   </h5>
                 </div>
                 <div class="btn-slider carousel-caption">
-                    <a href="./eroor404.html" class="bouttonSlide text-button btn btn-dark text-white">Découvrire le plat</a>
+                    <a id="btnPouletHerbes" class="bouttonSlide text-button btn btn-dark text-white">Découvrire le plat</a>
                 </div>
             </div>
             
@@ -388,7 +388,6 @@
       <div class="modal-body">
         <!-- Conteneur pour les éléments d'autocomplétion -->
         <div id="autocompleteContainer" class="list-group mt-1"></div>
-
         
       </div>
     </div>
@@ -396,7 +395,17 @@
 </div>
 
 
-<!-- Notification de Favoris -->
+<!-- Notification de Favoris Rajouter -->
+<div class="toast-container bg-sucesse position-fixed top-0 end-0 p-3 mt-5">
+  <div id="nourritureEnFavori" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body border border-success rounded">
+      <i class="bi bi-star-fill text-warning"></i>
+      Recette rajoutée au favori avec succées !
+    </div>
+  </div>
+</div>
+
+<!-- Notification de Favoris Enlever -->
 <div class="toast-container bg-sucesse position-fixed top-0 end-0 p-3 mt-5">
   <div id="nourritureEnFavori" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-body border border-success rounded">
@@ -408,7 +417,7 @@
 
 
 
-
+<!-- Favoris BTN -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const toastTrigger = document.getElementById('nourritureEnFavoriBtn');
