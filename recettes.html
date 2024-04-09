@@ -52,6 +52,10 @@
     cursor: pointer;
   }
 
+  .margin-auto {
+    margin: 75px 0;
+  }
+
   .carousel-item img {
     max-width: 100%; /* Limite la largeur de l'image à la taille de son conteneur */
     max-height: 100vh; /* Limite la hauteur de l'image à la taille de la fenêtre du navigateur */
@@ -101,6 +105,7 @@
       text-align: center;
       padding: 50px 0;
     }
+
 
 </style>
 
@@ -214,13 +219,13 @@
 </section>
 
   <!-- Section 2: Recherche rapide -->
-  <section class="p-5">
+  <section class="margin-auto p-5">
     <div class="container">
       <h2 class="display-5 text-center mb-5">Trouvez la recette parfaite en un instant</h2>
         <div class="row text-center">
           <!-- Card 1 -->
           <div class="col-md-4">
-            <div class="border-star border-black m-2">
+            <div class="border border-black rounded p-3 m-2">
                 <img class="mb-2" src="./images/card-horloge.png" alt="icone-horloges">
                 <p>Nos horraires</p>
                 <h3>Aujourd'hui de 10h00 - 22h00</h3>
@@ -229,7 +234,7 @@
 
           <!-- Card 2 -->
           <div class="col-md-4">
-            <div class="border-star border-black m-2">
+            <div class="border border-black rounded p-3 m-2">
                 <img class="mb-2" src="./images/card-position.png" alt="">
                 <p>Notre emplacements</p>
                 <h3>Paris, rue des champs élysée</h3>
@@ -238,7 +243,7 @@
 
           <!-- Card 3 -->
           <div class="col-md-4">
-            <div class="border-star border-black m-2">
+            <div class="border border-black rounded p-3 m-2">
                 <img class="mb-2" src="./images/card-contact.png" alt="">
                 <p>Contactez-nous</p>
                 <h3>+0123 456 7891</h3>
@@ -249,8 +254,44 @@
     </div>
   </section>
 
+  <section class="margin-auto p-5">
+    <div class="container">
+      <h2 class="display-5 text-center mb-5">Trouvez la recette parfaite en un instant</h2>
+      <div class="row row-cols-1 align-items-stretch text-center d-flex align-items-center justify-content-center">
+        <!-- Card 1 -->
+        <div class="col">
+          <div class="border border-black rounded p-3 m-2">
+            <img class="mb-2" src="./images/card-horloge.png" alt="icone-horloges">
+            <p>Nos horaires</p>
+            <h3>Aujourd'hui de 10h00 - 22h00</h3>
+          </div>
+        </div>
+  
+        <!-- Card 2 -->
+        <div class="col">
+          <div class="border border-black rounded p-3 m-2">
+            <img class="mb-2" src="./images/card-position.png" alt="">
+            <p>Notre emplacement</p>
+            <h3>Paris, rue des Champs Élysées</h3>
+          </div>
+        </div>
+  
+        <!-- Card 3 -->
+        <div class="col">
+          <div class="border border-black rounded p-3 m-2">
+            <img class="mb-2" src="./images/card-contact.png" alt="">
+            <p>Contactez-nous</p>
+            <h3>+0123 456 7891</h3>
+          </div>
+        </div>
+        <!-- Fin des cards -->
+      </div>
+    </div>
+  </section>
+  
+
   <!-- Section 3: Gestion des recettes -->
-  <section class="mt-5">
+  <section class="margin-auto mt-5">
 
     <div class="container">
       <h6 class="text-center text-tangerin">Les recettes les plus populaires</h6>
@@ -311,17 +352,18 @@
     </div>
   </section>
 
-  <!-- Section 4: Parcourez toutes les recettes -->
-  <div class="parallax my-5" style="background-image: url('./images/restaurant.jpeg'); backdrop-filter: blur(10px);">
-    <div class="parallax-overlay"></div>
-    <div class="parallax-content">
-      <h1 class="text-tangerin">Happy Meal</h1>
-      <p class="text-tangerine-light">Venez comme vous êtes</p>
-    </div>
-  </div>
-  
-</body>
+  <!-- Section 4: Parallax -->
+  <section class="margin-auto">
+        <div class="parallax my-5" style="background-image: url('./images/restaurant.jpeg');">
+                <div class="parallax-overlay"></div>
+                <div class="parallax-content">
+                <h1 class="text-tangerin">Happy Meal</h1>
+                <p class="text-tangerine-light">Venez comme vous êtes</p>
+                </div>
+        </div>
+  </section>
 
+</body>
 
 <footer class="my-5" style="height: 25vh;">
   <div class="container">
@@ -339,6 +381,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Favoris</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Qui somme-nous</a>
           </li>
         </ul>
       </div>

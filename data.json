@@ -1,6 +1,7 @@
 {
    "recettes":[
       {
+         "image": "https://example.com/image.jpg",
          "nom":"Poulet rôti aux herbes",
          "categorie":"Plat principal",
          "temps_preparation":"1 heure",
@@ -31,6 +32,7 @@
          ]
       },
       {
+         "image": "https://example.com/image.jpg",
          "nom":"Salade de quinoa aux légumes grillés",
          "categorie":"Entrée",
          "temps_preparation":"30 minutes",
