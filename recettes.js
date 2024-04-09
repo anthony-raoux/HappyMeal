@@ -1,3 +1,5 @@
+
+
 // Chargement des données JSON depuis un fichier externe
 fetch('data.json')
   .then(response => response.json())
@@ -37,7 +39,6 @@ function afficherRecettes(page, recettes) {
           <ol>
             ${recette.etapes.map(etape => `<li>${etape}</li>`).join('')}
           </ol>
-          <button class="btn btn-primary" onclick="ajouterAuxFavoris(${index})">Ajouter aux favoris</button>
         </div>
       </div>
     `;
@@ -45,15 +46,6 @@ function afficherRecettes(page, recettes) {
   });
 }
 
-// Fonction pour mettre en surbrillance la page active
-function mettreEnSurbrillancePageActive() {
-  const pagination = document.getElementById('pagination');
-  const elements = pagination.getElementsByTagName('a');
-  for (let i = 0; i < elements.length; i++) {
-    elements[i].parentNode.classList.remove('active');
-  }
-  elements[pageCourante - 1].parentNode.classList.add('active');
-}
 
 // Fonction pour afficher les boutons de pagination
 function afficherPagination(recettes) {
@@ -80,54 +72,3 @@ function afficherPagination(recettes) {
   mettreEnSurbrillancePageActive();
 }
 
-// Fonction pour ajouter une recette aux favoris
-function ajouterAuxFavoris(recetteId) {
-  // Logique pour ajouter la recette aux favoris (vous devez implémenter cela)
-  console.log('Recette ajoutée aux favoris:', recetteId);
-  // Mettre à jour l'interface utilisateur pour indiquer visuellement que la recette a été ajoutée aux favoris
-  const recette = document.getElementById(`recette-${recetteId}`);
-  recette.classList.toggle('favori');
-}
-
-
-// Fonction pour récupérer les détails de la recette
-function getRecipeDetails(nom) {
-  // Récupération des données JSON via fetch
-  fetch('data.json')
-    .then(response => response.json())
-    .then(data => {
-      // Recherche de la recette correspondante
-      const recipe = data.recettes.find(recipe => recipe.nom === nom);
-      if (recipe) {
-        // Construction du contenu HTML des détails de la recette
-        const htmlContent = `
-          <p><strong>Catégorie:</strong> ${recipe.categorie}</p>
-          <p><strong>Temps de préparation:</strong> ${recipe.temps_preparation}</p>
-          <p><strong>Ingrédients:</strong></p>
-          <ul>
-            ${recipe.ingredients.map(ingredient => `<li>${ingredient.nom} - ${ingredient.quantite}</li>`).join('')}
-          </ul>
-          <p><strong>Étapes:</strong></p>
-          <ol>
-            ${recipe.etapes.map(etape => `<li>${etape}</li>`).join('')}
-          </ol>
-        `;
-        // Affichage des détails de la recette dans la fenêtre modale
-        document.getElementById('recipeDetails').innerHTML = htmlContent;
-        // Afficher la fenêtre modale
-        var modal = new bootstrap.Modal(document.getElementById('recipeModal'));
-        modal.show();
-      } else {
-        console.log("Recette non trouvée");
-      }
-    })
-    .catch(error => console.error('Erreur lors de la récupération des données:', error));
-}
-
-// Ajout du gestionnaire d'événements au bouton "Détails"
-document.querySelector('.bg-tangerin').addEventListener('click', function() {
-  // Ici, vous devez récupérer le nom de la recette
-  const recipenom = "Poulet rôti aux herbes"; "Salade de quinoa aux légumes grillés"; // Par exemple, vous pouvez obtenir le nom de la recette à partir de la carte HTML
-  // Appel de la fonction pour récupérer les détails de la recette
-  getRecipeDetails(recipenom);
-});

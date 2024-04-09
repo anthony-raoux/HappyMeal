@@ -1,13 +1,71 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recette</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ma Superbe App de Cuisine</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
+  <!-- Boostrap Icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
+<header>
+    <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top bg-body-tertiary">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand" href="#">
+        <img src="./images/logo_w.png" alt="Logo" style="width: 50px;">
+      </a>
+      
+      <!-- Navbar Responsive  -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <!-- Liens du Navbar -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="recettes.html">Recettes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Favoris</a>
+          </li>
+        </ul>
+
+        <div class="mx-3 my-3">
+          <i class="bi bi-cart-plus"></i>
+        </div>
+
+        <!-- Icon recherche dans une modal -->
+        <div class="recherche mx-3 my-3">
+          <i class="bi bi-search" data-bs-toggle="modal" data-bs-target="#modalDeRecherche"></i>
+        </div>
+        
+        
+        <!-- Bar de recherche -->
+        <!-- <div class="d-flex justify-content-center align-items-center gap-3">
+          <input type="text" id="myInput" class="form-control" placeholder="Recherche...">
+          <button class="btn btn-outline-secondary" type="button" id="searchButton">Rechercher</button>
+        </div> -->
+        
+        
+      </div>
+    </div>
+  </nav>
+</header>
 <body>
-    <div id="details-recette">
+    <div class="container" style="margin-top: 100px;">
+      <div id="details-recette">
         <!-- Les détails de la recette sélectionnée seront affichés ici -->
+    </div>
     </div>
 
     <script>
@@ -47,6 +105,12 @@ function afficherDetailsRecette() {
 afficherDetailsRecette();
 
     </script>
-    <script src="./recettes.js"></script>
+    <script src="./recette.js"></script>
 </body>
 </html>
+
+
+
+
+
+

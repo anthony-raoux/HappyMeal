@@ -1,6 +1,6 @@
 const foodItems = [
-    "Poulet rôti aux herbes",
-    "poulet",
+    "Pizza Margherita",
+    "Spaghetti Bolognese",
     "Sushi",
     "Hamburger",
     "Tacos",
@@ -116,3 +116,26 @@ const foodItems = [
     // Effectuer une action avec le terme de recherche (par exemple, recherche sur une base de données, redirection vers une autre page, etc.)
     console.log('Recherche effectuée avec le terme :', searchTerm);
   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // COOKIES
