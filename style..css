@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.bg-tangerin {
+    background-color: #F48E28;
+}
+.text-tangerin {
+    color: #F48E28;
+}
+
+.bg-white {
+    background-color: #FFF;
+}
+.text-white {
+    color: #FFF;
+}
+
+.bg-black {
+    background-color: #d12121;
+}
+.text-black {
+    color: #000;
+}
+
+.bg-tangerine-light {
+    background-color: #F5DDC4;
+}
+.text-tangerine-light {
+    color: #F5DDC4;
+}
+

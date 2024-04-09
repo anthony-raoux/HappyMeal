@@ -4,7 +4,7 @@
          "nom":"Poulet rôti aux herbes",
          "categorie":"Plat principal",
          "temps_preparation":"1 heure",
-          "image": "./media/poulet.webp",
+          "image": "./images/poulet-roti-fines-herbes.jpg",
          "ingredients":[
             {
                "nom":"Poulet",
@@ -35,7 +35,7 @@
          "nom":"Salade de quinoa aux légumes grillés",
          "categorie":"Entrée",
          "temps_preparation":"30 minutes",
-         "image": "./media/quinoa.jpg",
+         "image": "./images/quinoa.jpg",
          "ingredients":[
             {
                "nom":"quinoa",
@@ -74,7 +74,7 @@
          "nom":"Tarte aux pommes",
          "categorie":"Dessert",
          "temps_preparation":"1 heure",
-         "image": "./media/tarte aux pommes.webp",
+         "image": "./images/tarte aux pommes.webp",
          "ingredients":[
             {
                "nom":"Pâte brisée",
@@ -115,7 +115,7 @@
          "nom":"Soupe de lentilles",
          "categorie":"Entrée",
          "temps_preparation":"1 heure",
-         "image": "./media/soupe lentilles.jpg",
+         "image": "./images/soupe lentilles.jpg",
          "ingredients":[
             {
                "nom":"Lentille",
@@ -156,7 +156,7 @@
          "nom":"Pâtes Carbonara",
          "categorie":"Plat principal",
          "temps_preparation":"20 minutes",
-         "image": "./media/pates carbonara.jpg",
+         "image": "./images/pates carbonara.jpg",
          "ingredients":[
             {
                "nom":"Pates",
@@ -198,7 +198,7 @@
          "nom":"Riz aux oignons",
          "categorie":"Plat principal",
          "temps_preparation":"40 minutes",
-         "image": "./media/riz oignon.jpg",
+         "image": "./images/riz oignon.jpg",
          "ingredients":[
             {
                "nom":"Riz",
@@ -242,13 +242,25 @@
          "nom":"Salade de fruits frais",
          "categorie":"Dessert",
          "temps_preparation":"20 minutes",
-         "image": "./media/Salade-de-fruits-44-scaled.jpg",
+         "image": "./images/Salade-de-fruits-44-scaled.jpg",
          "ingredients":[
             
-            "Fruits variés (fraises, kiwis, oranges, raisins, etc.), coupés en morceaux",
-            "Jus d'orange ou de citron",
-            "Miel ou sirop d'érable (facultatif)",
-            "Feuilles de menthe fraîche pour garnir"
+            {
+               "nom":"Fruits variées",
+               "quantite":"100g"
+            },
+            {
+               "nom":"Jus d'orange",
+               "quantite":"1"
+            },
+            {
+               "nom":"Miel",
+               "quantite":"2 cuillères "
+            },
+            {
+               "nom":"Feuille de menthe",
+               "quantite":"3"
+            }
          ],
          "etapes":[
             "Coupez tous les fruits en morceaux de taille similaire et placez-les dans un grand bol.",
@@ -263,7 +275,7 @@
          "nom":"Ratatouille provençale",
          "categorie":"Plat principal",
          "temps_preparation":"1 heure",
-         "image": "./media/ratatouille.jpg",
+         "image": "./images/ratatouille.jpg",
          "ingredients":[
             {
                "nom":"Aubergine",
@@ -305,7 +317,7 @@
          "nom":"Salade César",
          "categorie":"Entrée",
          "temps_preparation":"20 minutes",
-         "image": "./media/salade césar.jpg",
+         "image": "./images/salade césar.jpg",
          "ingredients":[
             {
                "nom":"Laitue",
@@ -345,7 +357,7 @@
          "nom":"Risotto aux champignons",
          "categorie":"Plat principal",
          "temps_preparation":"40 minutes",
-         "image": "./media/risoto champignon.webp",
+         "image": "./images/risoto champignon.webp",
          "ingredients":[
             {
                "nom":"Riz",
@@ -389,7 +401,7 @@
          "nom":"Muffins aux myrtilles",
          "categorie":"Dessert",
          "temps_preparation":"30 minutes",
-         "image": "./media/muffins myrtille.jpg",
+         "image": "./images/muffins myrtille.jpg",
          "ingredients":[
             {
                "nom":"Farine",
@@ -431,7 +443,7 @@
          "nom":"Lasagnes végétariennes",
          "categorie":"Plat principal",
          "temps_preparation":"1 heure 30 minutes",
-         "image": "./media/lasagnes-vegetariennes.jpeg",
+         "image": "./images/lasagnes-vegetariennes.jpeg",
          "ingredients":[
             {
                "nom":"Pâte",
@@ -474,7 +486,7 @@
          "nom":"Salade niçoise",
          "categorie":"Entrée",
          "temps_preparation":"20 minutes",
-         "image": "./media/salade nicoise.jpg",
+         "image": "./images/salade nicoise.jpg",
          "ingredients":[
             {
                "nom":"Laitue",
@@ -515,10 +527,54 @@
          ]
       },
       {
+         "nom":"Oeuf mollet",
+         "categorie":"Entrée",
+         "temps_preparation":"10 minutes",
+         "image": "./images/oeuf mollet.jpg",
+         "ingredients":[
+            {
+               "nom":"Oeuf",
+               "quantite":"2"
+            },
+            {
+               "nom":"Pain de campagne",
+               "quantite":"1"
+            },
+            {
+               "nom":"Beurre demi-sel",
+               "quantite":"1"
+            },
+            {
+               "nom":"Tomates",
+               "quantite":"2"
+            },
+            {
+               "nom":"Salade",
+               "quantite":"2"
+            },
+            {
+               "nom":"Bacon",
+               "quantite":"2 tranches"
+            },
+            {
+               "nom":"Huile d'olive",
+               "quantite":"10g"
+            }
+         ],
+         "etapes":[
+            "Faire bouillir dans une casserole de l'eau salée ou citronnée.",
+            "Laisser les œufs à température ambiante 1/2 h avant afin d’éviter la fêlure de la coquille avec l'eau chaude.",
+            "Déposer délicatement l’œuf dans l'eau frémissante et laisser 5 à 6 min.",
+            "Le retourner une ou deux fois de façon à avoir une cuisson homogène.",
+            "Retirer l’œuf de l'eau, le casser dans une assiette et apprécier avec une pointe de sel et quelques mouillettes de pain de campagne avec du beurre demi-sel.",
+            "Vous pouvez le servir en plat avec une bonne salade verte, des lardons et quelques tomates cerises."
+         ]
+      },
+      {
          "nom":"Tiramisu",
          "categorie":"Dessert",
          "temps_preparation":"30 minutes (+ temps de repos)",
-         "image": "./media/tiramisu.jpg",
+         "image": "./images/tiramisu.jpg",
          "ingredients":[
             {
                "nom":"Mascarpone",
