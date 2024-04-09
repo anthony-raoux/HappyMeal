@@ -257,7 +257,7 @@
             <div class="card-body">
               <div class="d-flex align-items-center justify-content-between">
                   <h5 class="card-title">Risotto aux champignons</h5>
-                  <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
+                  <i class="bi bi-star text-warning addToFavoritesBtn"></i>
               </div>
               <div class="d-flex align-items-center justify-content-between">
                   <button id="btnSaladeQuinoa" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Primary</button>
@@ -274,7 +274,7 @@
             <div class="card-body">
               <div class="d-flex align-items-center justify-content-between">
                   <h5 class="card-title">Risotto aux champignons</h5>
-                  <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
+                  <i class="bi bi-star text-warning addToFavoritesBtn"></i>
               </div>
               <div class="d-flex align-items-center justify-content-between">
                   <button id="btnTartePommes" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Primary</button>
@@ -291,7 +291,7 @@
             <div class="card-body">
               <div class="d-flex align-items-center justify-content-between">
                   <h5 class="card-title">Risotto aux champignons</h5>
-                  <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
+                  <i class="bi bi-star text-warning addToFavoritesBtn"></i>
               </div>
               <div class="d-flex align-items-center justify-content-between">
                   <button id="btnPouletHerbes" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Primary</button>
@@ -388,48 +388,67 @@
       <div class="modal-body">
         <!-- Conteneur pour les éléments d'autocomplétion -->
         <div id="autocompleteContainer" class="list-group mt-1"></div>
-        
+
       </div>
     </div>
   </div>
 </div>
 
 
+<!-- FAVOSRIS -->
 <!-- Notification de Favoris Rajouter -->
-<div class="toast-container bg-sucesse position-fixed top-0 end-0 p-3 mt-5">
-  <div id="nourritureEnFavori" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+<div class="toast-container position-fixed top-0 end-0 p-3 mt-5">
+  <div id="nourritureEnFavori1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-body border border-success rounded">
-      <i class="bi bi-star-fill text-warning"></i>
-      Recette rajoutée au favori avec succées !
+      <div class="notif-ajout">
+        <i class="bi bi-star-fill text-warning"></i>
+        Recette rajoutée au favori avec succès !
+      </div>
     </div>
   </div>
 </div>
 
 <!-- Notification de Favoris Enlever -->
-<div class="toast-container bg-sucesse position-fixed top-0 end-0 p-3 mt-5">
-  <div id="nourritureEnFavori" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-body border border-success rounded">
-      <i class="bi bi-star-fill text-warning"></i>
-      Recette rajoutée au favori avec succées !
+<div class="toast-container position-fixed top-0 end-0 p-3 mt-5">
+  <div id="nourritureEnFavori2" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body border border-danger rounded">
+      <div class="notif-enlever">
+        <i class="bi bi-star text-warning"></i>
+        Recette retirée de votre favori !
+      </div>
     </div>
   </div>
 </div>
 
 
 
-<!-- Favoris BTN -->
+<!-- Btn FAVORIS -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const toastTrigger = document.getElementById('nourritureEnFavoriBtn');
-    const toastLiveExample = document.getElementById('nourritureEnFavori');
-
-    if (toastTrigger && toastLiveExample) {
-      const toastBootstrap = new bootstrap.Toast(toastLiveExample);
-      toastTrigger.addEventListener('click', () => {
-        toastBootstrap.show();
-      });
-    }
-  });
+  document.addEventListener('DOMContentLoaded', function() {
+    const addButtons = document.querySelectorAll('.addToFavoritesBtn');
+    const toast1 = document.getElementById('nourritureEnFavori1');
+    const toast2 = document.getElementById('nourritureEnFavori2');
+    
+    addButtons.forEach(addButton => {
+        let isAdded = false;
+        
+        addButton.addEventListener('click', function() {
+            isAdded = !isAdded;
+            
+            if (isAdded) {
+                addButton.classList.remove('bi-star');
+                addButton.classList.add('bi-star-fill');
+                const toastBootstrap1 = new bootstrap.Toast(toast1);
+                toastBootstrap1.show();
+            } else {
+                addButton.classList.remove('bi-star-fill');
+                addButton.classList.add('bi-star');
+                const toastBootstrap2 = new bootstrap.Toast(toast2);
+                toastBootstrap2.show();
+            }
+        });
+    });
+});
 </script>
 
 
