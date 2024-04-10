@@ -1,44 +1,294 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ma Superbe App de Cuisine</title>
 
-    <!-- Bootstrap CSS -->
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
-<body>
-    <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Launch static backdrop modal
-  </button>
   
-  <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Salut c'est nous les cookies</h1>
+  <!-- Boostrap Icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<!-- Custom CSS -->
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .bg-tangerin {
+      background-color: #F48E28;
+  }
+  .text-tangerin {
+      color: #F48E28;
+  }
+
+  .bg-white {
+      background-color: #FFF;
+  }
+  .text-white {
+      color: #FFF;
+  }
+
+  .bg-black {
+      background-color: #000;
+  }
+  .text-black {
+      color: #000;
+  }
+
+  .bg-tangerine-light {
+      background-color: #F5DDC4;
+  }
+  .text-tangerine-light {
+      color: #F5DDC4;
+  }
+
+  .recherche {
+    cursor: pointer;
+  }
+
+  .carousel-item img {
+    max-width: 100%; /* Limite la largeur de l'image à la taille de son conteneur */
+    max-height: 100vh; /* Limite la hauteur de l'image à la taille de la fenêtre du navigateur */
+    min-height: 100vh; /* Limite la hauteur de l'image à la taille de la fenêtre du navigateur */
+    width: auto; /* Ajuste la largeur de l'image en conséquence */
+    height: auto; /* Ajuste la hauteur de l'image en conséquence */
+    margin: 0 auto; /* Centre l'image horizontalement */
+    display: block; /* Assure que l'image est affichée en tant que bloc */
+    object-fit: cover; /* Ajuste l'image pour remplir la zone sans déformation */
+    object-position: center; /* Ce{ntre l'image horizontalement */
+}
+
+.list-group-item  {
+  background: #F5DDC4;
+  color: #000;
+  border: #000 1px solid;
+}
+.list-group-item:hover {
+  background: #F48E28;
+  color: #FFF;
+}
+.list-group-item:active {
+  background: #F48E28;
+  color: #FFF;
+}
+
+
+.parallax {
+      position: relative;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 25vh;
+    }
+    .parallax-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Couleur de l'overlay */
+    }
+    .parallax-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 50px 0;
+      color: white;
+    }
+</style>
+
+<header>
+    <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top bg-body-tertiary">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand" href="#">
+        <img src="./images/logo_w.png" alt="Logo" style="width: 50px;">
+      </a>
+      
+      <!-- Navbar Responsive  -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <!-- Liens du Navbar -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="./index.html">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./recette.html">Recettes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./favoris.html">Favoris</a>
+            </li>
+        </ul>
+
+        <!-- Icon recherche dans une modal -->
+        <div class="recherche mx-3 my-3">
+          <i class="bi bi-search" data-bs-toggle="modal" data-bs-target="#modalDeRecherche"></i>
         </div>
-        <div class="modal-body d-flex flex-column">
-            <img class="center text-center" src="./images/cookies.png" alt="cookies image" width="100px" height="100px">
-          <p>Nous collectons des données pour améliorer votre expérience utilisateur. Veuillez accepter pour continuer.</p>
-        </div>
-        <div class="modal-footer d-flex align-item-center justify-content-center">
-          
-          <button type="button" class="btn btn-primary">Accepter</button>
-        </div>
-        <button type="text" class="btn text-secondary" data-bs-dismiss="modal">Continuer sans accepter</button>
+        
+        
+        <!-- Bar de recherche -->
+        <!-- <div class="d-flex justify-content-center align-items-center gap-3">
+          <input type="text" id="myInput" class="form-control" placeholder="Recherche...">
+          <button class="btn btn-outline-secondary" type="button" id="searchButton">Rechercher</button>
+        </div> -->
+        
+        
       </div>
     </div>
-    
+  </nav>
+</header>
+<body>
+
+<!-- Recette 1 -->
+<div class="col">
+    <div class="card" data-card-id="recette1">
+        <img id="imageRecette1" src="./images/risotto_aux_champignons.png" class="card-img-top" alt="voila">
+        <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between">
+                <h5 id="titreRecette1" class="card-title">Risotto aux champignons</h5>
+                <button id="btnRecette1">Sauvegarder la recette 1</button>
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+                <button id="btnSaladeQuinoa" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Primary</button>
+                <h6 id="prixRecette1">15.00€</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="alertMessage" class="alert alert-success" style="display: none;"></div>
+
+
+<!-- JavaScript -->
+<script>
+// Sélectionne le bouton de la recette 1
+var btnRecette1 = document.getElementById('btnRecette1');
+
+// Ajoute un écouteur d'événements au bouton de la recette 1
+btnRecette1.addEventListener('click', function(event) {
+    // Empêcher le comportement par défaut du bouton
+    event.preventDefault();
+
+    // Récupère les données de la recette 1 depuis le localStorage
+    var recette1Data = JSON.parse(localStorage.getItem('recette1'));
+
+    if (recette1Data) {
+        // Si les données existent, supprime-les du localStorage
+        localStorage.removeItem('recette1');
+        afficherMessage('Recette 1 supprimée du localStorage.', 'success');
+        // Change le texte du bouton pour indiquer qu'il peut sauvegarder la recette
+        btnRecette1.textContent = 'Sauvegarder la recette 1';
+    } else {
+        // Si les données n'existent pas, sauvegarde-les dans le localStorage
+        var image = document.getElementById('imageRecette1').src;
+        var titre = document.getElementById('titreRecette1').textContent;
+        var prix = document.getElementById('prixRecette1').textContent;
+
+        localStorage.setItem('recette1', JSON.stringify({
+            image: image,
+            titre: titre,
+            prix: prix
+        }));
+        afficherMessage('Recette 1 sauvegardée dans le localStorage.', 'success');
+        // Change le texte du bouton pour indiquer qu'il peut supprimer la recette
+        btnRecette1.textContent = 'Supprimer la recette 1';
+    }
+});
+
+// Fonction pour afficher un message
+function afficherMessage(message, type) {
+    var alertMessage = document.getElementById('alertMessage');
+    alertMessage.textContent = message;
+    alertMessage.classList.add('alert-' + type);
+    alertMessage.style.display = 'block';
+
+    // Masquer le message après quelques secondes
+    setTimeout(function() {
+        alertMessage.style.display = 'none';
+        alertMessage.classList.remove('alert-' + type);
+    }, 3000); // 3000 millisecondes = 3 secondes
+}
+
+</script>
+
+    <a href="./favoris.html">Revenir à la page 1</a>
+</body>
+
+<!-- FAVOSRIS -->
+<!-- Notification de Favoris Rajouter -->
+<div class="toast-container position-fixed top-0 end-0 p-3 mt-5">
+  <div id="nourritureEnFavori1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body border border-success rounded d-flex align-items-center justify-content-between">
+      <div class="notif-ajout">
+        <i class="bi bi-star-fill text-warning"></i>
+        Recette rajoutée au favori avec succès ! <a href="./favoris.html"><span class="text-tangerin">Voir</span></a>
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
   </div>
+</div>
+
+<!-- Notification de Favoris Enlever -->
+<div class="toast-container position-fixed top-0 end-0 p-3 mt-5">
+  <div id="nourritureEnFavori2" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body border border-danger rounded d-flex align-items-center justify-content-between">
+      <div class="notif-enlever">
+        <i class="bi bi-star text-warning"></i>
+        Recette retirée de votre favori !
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Btn FAVORIS -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const addButtons = document.querySelectorAll('.addToFavoritesBtn');
+    const toast1 = document.getElementById('nourritureEnFavori1');
+    const toast2 = document.getElementById('nourritureEnFavori2');
+    
+    addButtons.forEach(addButton => {
+        let isAdded = false;
+        
+        addButton.addEventListener('click', function() {
+            isAdded = !isAdded;
+            
+            if (isAdded) {
+                addButton.classList.remove('bi-star');
+                addButton.classList.add('bi-star-fill');
+                const toastBootstrap1 = new bootstrap.Toast(toast1);
+                toastBootstrap1.show();
+            } else {
+                addButton.classList.remove('bi-star-fill');
+                addButton.classList.add('bi-star');
+                const toastBootstrap2 = new bootstrap.Toast(toast2);
+                toastBootstrap2.show();
+            }
+        });
+    });
+});
+</script>
+
+
+  <!-- Bootstrap JavaScript et dépendances -->
   
 
-
-</body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="./script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="./test.js"></script>
 </html>
