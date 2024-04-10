@@ -54,3 +54,16 @@ function afficherRecette(recette) {
     // Rediriger vers la page recette.html avec les détails de la recette sélectionnée
     window.location.href = `recette.html?nom=${encodeURIComponent(recette.nom)}&categorie=${encodeURIComponent(recette.categorie)}&temps_preparation=${encodeURIComponent(recette.temps_preparation)}&ingredients=${encodeURIComponent(JSON.stringify(recette.ingredients))}&etapes=${encodeURIComponent(JSON.stringify(recette.etapes))}`;
 }
+
+  // Fonction pour obtenir les paramètres de l'URL
+  function obtenirParametresUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const recette = {
+        nom: params.get('nom'),
+        categorie: params.get('categorie'),
+        temps_preparation: params.get('temps_preparation'),
+        ingredients: JSON.parse(params.get('ingredients')),
+        etapes: JSON.parse(params.get('etapes'))
+    };
+    return recette;
+}

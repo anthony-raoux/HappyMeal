@@ -136,9 +136,6 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Favoris</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="commander.html">Commander</a>
-          </li>
         </ul>
 
         
@@ -170,9 +167,10 @@
    <!-- Section 3: Gestion des recettes -->
    <section class="mt-5">
 
+    <div id="recettesContainer" class="container">
     <div class="container">
       <h6 class="text-center text-tangerin">Les recettes les plus populaires</h6>
-      <h4 class="display-5 text-center mb-5">Découvrez nos recette </h4>
+      <h4 class="display-5 text-center mb-5">Découvrez nos recettes </h4>
       <div class="row row-cols-1 row-cols-md-3 g-3">
 
         <!-- Recette 1 -->
@@ -428,10 +426,16 @@
             </div>
           </div>
         </div>
-        
+      </div>
+     
       </div>
     </div>
   </section>
+
+  <nav id="paginationContainer" aria-label="Page navigation example">
+    <ul id="pagination" class="pagination justify-content-center"></ul>
+</nav>
+
 
 
  <!-- Section 4: Parcourez toutes les recettes -->
@@ -560,5 +564,6 @@ document.addEventListener('DOMContentLoaded', function() {
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="./script.js"></script>
   <script src="./recette.js"></script>
+  <script src="./recettes.js"></script>
 
 </html>

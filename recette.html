@@ -38,9 +38,6 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Favoris</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="commander.html">Commander</a>
-          </li>
         </ul>
 
         <div class="mx-3 my-3">
@@ -71,43 +68,141 @@
     </div>
     </div>
 
-    <script>
-        // Fonction pour obtenir les paramètres de l'URL
-function obtenirParametresUrl() {
-    const params = new URLSearchParams(window.location.search);
-    const recette = {
-        nom: params.get('nom'),
-        categorie: params.get('categorie'),
-        temps_preparation: params.get('temps_preparation'),
-        ingredients: JSON.parse(params.get('ingredients')),
-        etapes: JSON.parse(params.get('etapes'))
-    };
-    return recette;
-}
+    <!-- Conteneur pour afficher la liste de courses -->
+<div id="liste-de-courses"></div>
+    
+<script>
 
-// Fonction pour afficher les détails de la recette
-function afficherDetailsRecette() {
-    const recette = obtenirParametresUrl();
-    const detailsRecette = document.getElementById('details-recette');
-    detailsRecette.innerHTML = `
-        <h2>${recette.nom}</h2>
-        <p><strong>Catégorie :</strong> ${recette.categorie}</p>
-        <p><strong>Temps de préparation :</strong> ${recette.temps_preparation}</p>
-        <h3>Ingrédients :</h3>
-        <ul>
-            ${recette.ingredients.map(ingredient => `<li>${ingredient.nom} : ${ingredient.quantite}</li>`).join('')}
-        </ul>
-        <h3>Étapes :</h3>
-        <ol>
-            ${recette.etapes.map(etape => `<li>${etape}</li>`).join('')}
-        </ol>
-    `;
-}
+      // Fonction pour afficher la liste de courses
+      function afficherListeCourses() {
+        const listeCourses = ingredientsListe.join('\n');
+        if (listeCourses.trim() === '') {
+            afficherNotificationErreur('La liste de courses est vide.');
+        } else {
+            alert(listeCourses);
+        }
+    }
 
-// Appel de la fonction pour afficher les détails de la recette au chargement de la page
-afficherDetailsRecette();
+  // Tableau pour stocker les ingrédients de la recette
+  var ingredientsListe = [];
 
-    </script>
+  // Fonction pour obtenir les paramètres de l'URL
+  function obtenirParametresUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const recette = {
+          nom: params.get('nom'),
+          categorie: params.get('categorie'),
+          temps_preparation: params.get('temps_preparation'),
+          ingredients: JSON.parse(params.get('ingredients')),
+          etapes: JSON.parse(params.get('etapes'))
+      };
+      return recette;
+  }
+
+   // Fonction pour afficher une notification
+   function afficherNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.className = `alert alert-${type} mt-3`;
+        notification.textContent = message;
+        document.getElementById('notifications').appendChild(notification);
+        // Supprimer la notification après quelques secondes
+        setTimeout(() => {
+            notification.remove();
+        }, 3000); // La notification disparaîtra après 3 secondes (3000 millisecondes)
+    }
+
+    // Fonction pour afficher une notification de succès
+    function afficherNotificationSucces(message) {
+        afficherNotification(message, 'success');
+    }
+
+    // Fonction pour afficher une notification d'erreur
+    function afficherNotificationErreur(message) {
+        afficherNotification(message, 'danger');
+    }
+
+    // Fonction pour ajouter un ingrédient à la liste de courses
+    function ajouterIngredientALaListe(ingredient) {
+        if (!ingredientsListe.includes(ingredient)) {
+            ingredientsListe.push(ingredient);
+            afficherNotificationSucces(`"${ingredient}" a été ajouté à la liste de courses.`);
+        } else {
+            afficherNotificationErreur(`"${ingredient}" est déjà dans la liste de courses.`);
+        }
+    }
+
+      // Fonction pour supprimer la liste de courses
+      function supprimerListeCourses() {
+        ingredientsListe = []; // Vide le tableau des ingrédients de la liste de courses
+        document.getElementById('liste-courses').innerHTML = ''; // Efface le contenu affiché de la liste de courses
+        afficherNotificationSucces('La liste de courses a été supprimée.');
+    }
+
+
+    // Fonction pour supprimer un ingrédient de la liste de courses
+    function supprimerIngredientDeLaListe(ingredient) {
+        const index = ingredientsListe.indexOf(ingredient);
+        if (index !== -1) {
+            if (ingredientsListe[index].match(/x(\d+)/) && parseInt(ingredientsListe[index].match(/x(\d+)/)[1]) > 2) {
+                ingredientsListe[index] = `${ingredient} x${parseInt(ingredientsListe[index].match(/x(\d+)/)[1]) - 1}`;
+                afficherNotificationSucces(`Un "${ingredient}" a été retiré de la liste de courses (${ingredientsListe[index]} restants).`);
+            } else {
+                ingredientsListe.splice(index, 1);
+                afficherNotificationSucces(`"${ingredient}" a été supprimé de la liste de courses.`);
+            }
+        } else {
+            afficherNotificationErreur(`"${ingredient}" n'est pas dans la liste de courses.`);
+        }
+    }
+  // Fonction pour afficher les détails de la recette
+  function afficherDetailsRecette() {
+      const recette = obtenirParametresUrl();
+      const detailsRecette = document.getElementById('details-recette');
+      detailsRecette.innerHTML = `
+      <div id="notifications"></div>
+          <h2>${recette.nom}</h2>
+          <p><strong>Catégorie :</strong> ${recette.categorie}</p>
+          <p><strong>Temps de préparation :</strong> ${recette.temps_preparation}</p>
+          <h3>Ingrédients :</h3>
+          <ul id="liste-ingredients">
+              ${recette.ingredients.map(ingredient => `
+                  <li>
+                      ${ingredient.nom} : ${ingredient.quantite}
+                      <button class="btn btn-primary btn-sm" onclick="ajouterIngredientALaListe('${ingredient.nom}')">Ajouter</button>
+                      <button class="btn btn-danger btn-sm" onclick="supprimerIngredientDeLaListe('${ingredient.nom}')">Supprimer</button>
+                  </li>`
+              ).join('')}
+          </ul>
+          <h3>Étapes de préparation :</h3>
+          <ol>
+              ${recette.etapes.map(etape => `<li>${etape}</li>`).join('')}
+          </ol>
+          <button class="btn btn-success mt-3" onclick="telechargerListeCourses()">Télécharger Liste de Courses</button>
+          <button class="btn btn-danger mt-3" onclick="supprimerListeCourses()">Supprimer la liste de courses</button>
+          <button class="btn btn-primary mt-3" onclick="afficherListeCourses()">Voir la liste de courses</button>
+      `;
+  }
+
+  // Fonction pour télécharger la liste de courses
+  function telechargerListeCourses() {
+      const listeCourses = ingredientsListe.join('\n');
+      const blob = new Blob([listeCourses], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'liste_de_courses.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+  }
+
+  // Appel de la fonction pour afficher les détails de la recette au chargement de la page
+  afficherDetailsRecette();
+
+  
+</script>
+
     <script src="./recette.js"></script>
 </body>
 </html>
