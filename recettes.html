@@ -15,7 +15,7 @@
 
 <!-- Custom CSS -->
 <style>
-  * {
+ * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -78,6 +78,10 @@
   color: #FFF;
 }
 
+.card-img-top{
+      object-fit:cover;
+      height: 250px;
+    }
 
 .parallax {
       position: relative;
@@ -102,11 +106,7 @@
       padding: 50px 0;
       color: white;
     }
-
-    .card-img-top {
-    max-height: 400px; /* Limite la hauteur des images */
-    object-fit: cover; /* Ajuste la taille de l'image tout en conservant les proportions */
-  }
+  
 
 </style>
 
@@ -136,6 +136,9 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Favoris</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="commander.html">Commander</a>
+          </li>
         </ul>
 
         
@@ -164,17 +167,271 @@
 <body>
 
  
+   <!-- Section 3: Gestion des recettes -->
+   <section class="mt-5">
 
-        <div class="row text-center">
-          <div class="container mt-5">
-            <h1 class="mb-4" style="margin-top: 50px;">Toute nos recettes</h1>
-            <div class="row" id="recettes-container"></div>
-            <nav aria-label="Page navigation">
-              <ul class="pagination" id="pagination"></ul>
-            </nav>
+    <div class="container">
+      <h6 class="text-center text-tangerin">Les recettes les plus populaires</h6>
+      <h4 class="display-5 text-center mb-5">Découvrez nos recette </h4>
+      <div class="row row-cols-1 row-cols-md-3 g-3">
+
+        <!-- Recette 1 -->
+        <div class="col">
+          <div class="card" data-card-id="recette1">
+            <img id="imageRecette1" src="./images/poulet-roti-fines-herbes.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <div class="d-flex align-items-center justify-content-between">
+                  <h5 id="titreRecette1" class="card-title">Poulet rôti aux herbes</h5>
+                  <i id="favoriRecette1" class="bi bi-star text-warning addToFavoritesBtn" data-button-id="favoriRecette1"></i>
+              </div>
+              <div class="d-flex align-items-center justify-content-between">
+                  <button id="btnPouletHerbes" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
+                  <h6 id="prixRecette1"15.00€></h6>
+              </div>
+            </div>
+          </div>
         </div>
-    
 
+        <!-- Recette 2 -->
+        <div class="col">
+          <div class="card">
+            <img src="./images/quinoa.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <div class="d-flex align-items-center justify-content-between">
+                  <h5 class="card-title">Salade de quinoa aux légumes grillés</h5>
+                  <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
+              </div>
+              <div class="d-flex align-items-center justify-content-between">
+                  <button id="btnSaladeQuinoa" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
+                  <h6>15.00€</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recette 3 -->
+        <div class="col">
+          <div class="card">
+            <img src="./images/tarte aux pommes.webp" class="card-img-top" alt="...">
+            <div class="card-body">
+              <div class="d-flex align-items-center justify-content-between">
+                  <h5 class="card-title">Tarte aux pommes</h5>
+                  <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
+              </div>
+              <div class="d-flex align-items-center justify-content-between">
+                  <button id="btnTartePommes" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
+                  <h6>15.00€</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Recette 4 -->
+        <div class="col">
+          <div class="card">
+            <img src="./images/soupe lentilles.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <div class="d-flex align-items-center justify-content-between">
+                  <h5 class="card-title">Soupe de lentilles</h5>
+                  <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
+              </div>
+              <div class="d-flex align-items-center justify-content-between">
+                  <button id="btnsoupelentilles" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
+                  <h6>15.00€</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+
+            <!-- Recette 5 -->
+    <div class="col">
+      <div class="card">
+        <img src="./images/pates carbonara.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between">
+              <h5 class="card-title">Pâtes Carbonara</h5>
+              <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+              <button id="btnpatescarbo" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
+              <h6>15.00€</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <!-- Recette 6 -->
+        <div class="col">
+          <div class="card">
+            <img src="./images/riz oignon.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <div class="d-flex align-items-center justify-content-between">
+                  <h5 class="card-title">Riz aux oignons</h5>
+                  <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
+              </div>
+              <div class="d-flex align-items-center justify-content-between">
+                  <button id="btnrizoignon" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
+                  <h6>15.00€</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+         <!-- Recette 7 -->
+    <div class="col">
+      <div class="card">
+        <img src="./images/Salade-de-fruits-44-scaled.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between">
+              <h5 class="card-title">Salade de fruits frais </h5>
+              <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+              <button id="btnsaladedefruits" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
+              <h6>15.00€</h6>
+              
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recette 8 -->
+    <div class="col">
+      <div class="card">
+        <img src="./images/ratatouille.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between">
+              <h5 class="card-title">Ratatouille provençale</h5>
+              <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+              <button id="btnratatouille" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
+              <h6>15.00€</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recette 9 -->
+    <div class="col">
+      <div class="card">
+        <img src="./images/salade césar.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between">
+              <h5 class="card-title">Salade César</h5>
+              <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+              <button id="btnsaladecesar" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
+              <h6>15.00€</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <!-- Recette 10 -->
+        <div class="col">
+          <div class="card">
+            <img src="./images/risoto champignon.webp" class="card-img-top" alt="...">
+            <div class="card-body">
+              <div class="d-flex align-items-center justify-content-between">
+                  <h5 class="card-title">Risotto aux champignons</h5>
+                  <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
+              </div>
+              <div class="d-flex align-items-center justify-content-between">
+                  <button id="btnrisotochampignon" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
+                  <h6>15.00€</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+
+            <!-- Recette 11 -->
+    <div class="col">
+      <div class="card">
+        <img src="./images/muffins myrtille.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between">
+              <h5 class="card-title">Muffins aux myrtilles</h5>
+              <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+              <button id="btnmuffins" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
+              <h6>15.00€</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <!-- Recette 12 -->
+        <div class="col">
+          <div class="card">
+            <img src="./images/lasagnes-vegetariennes.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <div class="d-flex align-items-center justify-content-between">
+                  <h5 class="card-title">Lasagnes végétariennes</h5>
+                  <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
+              </div>
+              <div class="d-flex align-items-center justify-content-between">
+                  <button id="btnlasagnes" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
+                  <h6>15.00€</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+            <!-- Recette 13 -->
+    <div class="col">
+      <div class="card">
+        <img src="./images/salade nicoise.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between">
+              <h5 class="card-title">Salade niçoise</h5>
+              <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+              <button id="btnsaladenicoise" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
+              <h6>15.00€</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <!-- Recette 14 -->
+        <div class="col">
+          <div class="card">
+            <img src="./images/tiramisu.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <div class="d-flex align-items-center justify-content-between">
+                  <h5 class="card-title">Tiramisu</h5>
+                  <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
+              </div>
+              <div class="d-flex align-items-center justify-content-between">
+                  <button id="btntiramisu" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
+                  <h6>15.00€</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Recette 15 -->
+        <div class="col">
+          <div class="card">
+            <img src="./images/oeuf mollet.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <div class="d-flex align-items-center justify-content-between">
+                  <h5 class="card-title">Oeuf mollet</h5>
+                  <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
+              </div>
+              <div class="d-flex align-items-center justify-content-between">
+                  <button id="btnoeufmollet" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
+                  <h6>15.00€</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
 
 
  <!-- Section 4: Parcourez toutes les recettes -->
@@ -302,6 +559,6 @@ document.addEventListener('DOMContentLoaded', function() {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="./script.js"></script>
-  <script src="recettes.js"></script>
+  <script src="./recette.js"></script>
 
 </html>

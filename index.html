@@ -106,6 +106,12 @@
       padding: 50px 0;
       color: white;
     }
+    #recette img {
+          max-width: 100%;
+          display: block; /* Pour centrer l'image */
+            margin: 0 auto; /* Pour centrer l'image horizontalement */
+          height: 300px;
+        }
 
 </style>
 
@@ -133,7 +139,7 @@
             <a class="nav-link" href="recettes.html">Recettes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Favoris</a>
+            <a class="nav-link" href="favoris.html">Favoris</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="commander.html">Commander</a>
@@ -159,7 +165,7 @@
 </header>
 <body>
 
-  <!-- Section 1: Landing -->
+  <!-- Section 1: CAROUSEL -->
   <section class="content-slider">
     <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -220,7 +226,7 @@
   <!-- Section 2: Recherche rapide -->
   <section class="p-5">
     <div class="container">
-      <h2 class="display-5 text-center mb-5">Trouvez la recette parfaite en un instant ouuuuuuuuuu</h2>
+      <h2 class="display-5 text-center mb-5">Trouvez la recette parfaite en un instant</h2>
         <div class="row text-center">
           <!-- Card 1 -->
           <div class="col-md-4">
@@ -254,269 +260,24 @@
   </section>
 
   <!-- Section 3: Gestion des recettes -->
-  <section class="mt-5">
-
-    <div class="container">
-      <h6 class="text-center text-tangerin">Les recettes les plus populaires</h6>
-      <h4 class="display-5 text-center mb-5">Découvrez nos recette </h4>
-      <div class="row row-cols-1 row-cols-md-3 g-3">
-        <!-- Recette 1 -->
-        <div class="col">
-          <div class="card">
-            <img src="./images/poulet-roti-fines-herbes.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <div class="d-flex align-items-center justify-content-between">
-                  <h5 class="card-title">Poulet rôti aux herbes</h5>
-                  <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
-              </div>
-              <div class="d-flex align-items-center justify-content-between">
-                  <button id="btnPouletHerbes" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
-                  <h6>15.00€</h6>
-              </div>
+  <div class="container mt-5">
+    <div class="card">
+        <div class="row no-gutters">
+            <div class="col-md-12">
+                <div class="card-body">
+                    <h1 class="card-title text-center">Notre recette du jour</h1>
+                    <div id="recette">
+                        <!-- La recette sera affichée ici -->
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-
-        <!-- Recette 2 -->
-        <div class="col">
-          <div class="card">
-            <img src="./images/quinoa.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <div class="d-flex align-items-center justify-content-between">
-                  <h5 class="card-title">Salade de quinoa aux légumes grillés</h5>
-                  <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
-              </div>
-              <div class="d-flex align-items-center justify-content-between">
-                  <button id="btnSaladeQuinoa" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
-                  <h6>15.00€</h6>
-              </div>
+            <div class="col-md-4">
+                <img id="recette-img" class="card-img" src="" alt="">
             </div>
-          </div>
         </div>
-
-        <!-- Recette 3 -->
-        <div class="col">
-          <div class="card">
-            <img src="./images/tarte aux pommes.webp" class="card-img-top" alt="...">
-            <div class="card-body">
-              <div class="d-flex align-items-center justify-content-between">
-                  <h5 class="card-title">Tarte aux pommes</h5>
-                  <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
-              </div>
-              <div class="d-flex align-items-center justify-content-between">
-                  <button id="btnTartePommes" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
-                  <h6>15.00€</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Recette 4 -->
-        <div class="col">
-          <div class="card">
-            <img src="./images/soupe lentilles.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <div class="d-flex align-items-center justify-content-between">
-                  <h5 class="card-title">Soupe de lentilles</h5>
-                  <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
-              </div>
-              <div class="d-flex align-items-center justify-content-between">
-                  <button id="btnsoupelentilles" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
-                  <h6>15.00€</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-
-            <!-- Recette 5 -->
-    <div class="col">
-      <div class="card">
-        <img src="./images/pates carbonara.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <div class="d-flex align-items-center justify-content-between">
-              <h5 class="card-title">Pâtes Carbonara</h5>
-              <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
-          </div>
-          <div class="d-flex align-items-center justify-content-between">
-              <button id="btnpatescarbo" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
-              <h6>15.00€</h6>
-          </div>
-        </div>
-      </div>
     </div>
-
-        <!-- Recette 6 -->
-        <div class="col">
-          <div class="card">
-            <img src="./images/riz oignon.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <div class="d-flex align-items-center justify-content-between">
-                  <h5 class="card-title">Riz aux oignons</h5>
-                  <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
-              </div>
-              <div class="d-flex align-items-center justify-content-between">
-                  <button id="btnrizoignon" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
-                  <h6>15.00€</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-         <!-- Recette 7 -->
-    <div class="col">
-      <div class="card">
-        <img src="./images/Salade-de-fruits-44-scaled.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <div class="d-flex align-items-center justify-content-between">
-              <h5 class="card-title">Salade de fruits frais </h5>
-              <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
-          </div>
-          <div class="d-flex align-items-center justify-content-between">
-              <button id="btnsaladedefruits" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
-              <h6>15.00€</h6>
-              
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Recette 8 -->
-    <div class="col">
-      <div class="card">
-        <img src="./images/ratatouille.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <div class="d-flex align-items-center justify-content-between">
-              <h5 class="card-title">Ratatouille provençale</h5>
-              <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
-          </div>
-          <div class="d-flex align-items-center justify-content-between">
-              <button id="btnratatouille" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
-              <h6>15.00€</h6>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Recette 9 -->
-    <div class="col">
-      <div class="card">
-        <img src="./images/salade césar.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <div class="d-flex align-items-center justify-content-between">
-              <h5 class="card-title">Salade César</h5>
-              <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
-          </div>
-          <div class="d-flex align-items-center justify-content-between">
-              <button id="btnsaladecesar" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
-              <h6>15.00€</h6>
-          </div>
-        </div>
-      </div>
-    </div>
-
-        <!-- Recette 10 -->
-        <div class="col">
-          <div class="card">
-            <img src="./images/risoto champignon.webp" class="card-img-top" alt="...">
-            <div class="card-body">
-              <div class="d-flex align-items-center justify-content-between">
-                  <h5 class="card-title">Risotto aux champignons</h5>
-                  <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
-              </div>
-              <div class="d-flex align-items-center justify-content-between">
-                  <button id="btnrisotochampignon" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
-                  <h6>15.00€</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-
-            <!-- Recette 11 -->
-    <div class="col">
-      <div class="card">
-        <img src="./images/muffins myrtille.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <div class="d-flex align-items-center justify-content-between">
-              <h5 class="card-title">Muffins aux myrtilles</h5>
-              <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
-          </div>
-          <div class="d-flex align-items-center justify-content-between">
-              <button id="btnmuffins" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
-              <h6>15.00€</h6>
-          </div>
-        </div>
-      </div>
-    </div>
-
-        <!-- Recette 12 -->
-        <div class="col">
-          <div class="card">
-            <img src="./images/lasagnes-vegetariennes.jpeg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <div class="d-flex align-items-center justify-content-between">
-                  <h5 class="card-title">Lasagnes végétariennes</h5>
-                  <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
-              </div>
-              <div class="d-flex align-items-center justify-content-between">
-                  <button id="btnlasagnes" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
-                  <h6>15.00€</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        
-            <!-- Recette 13 -->
-    <div class="col">
-      <div class="card">
-        <img src="./images/salade nicoise.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <div class="d-flex align-items-center justify-content-between">
-              <h5 class="card-title">Salade niçoise</h5>
-              <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
-          </div>
-          <div class="d-flex align-items-center justify-content-between">
-              <button id="btnsaladenicoise" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
-              <h6>15.00€</h6>
-          </div>
-        </div>
-      </div>
-    </div>
-
-        <!-- Recette 14 -->
-        <div class="col">
-          <div class="card">
-            <img src="./images/tiramisu.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <div class="d-flex align-items-center justify-content-between">
-                  <h5 class="card-title">Tiramisu</h5>
-                  <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
-              </div>
-              <div class="d-flex align-items-center justify-content-between">
-                  <button id="btntiramisu" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
-                  <h6>15.00€</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Recette 15 -->
-        <div class="col">
-          <div class="card">
-            <img src="./images/oeuf mollet.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <div class="d-flex align-items-center justify-content-between">
-                  <h5 class="card-title">Oeuf mollet</h5>
-                  <i class="bi bi-star" id="nourritureEnFavoriBtn"></i>
-              </div>
-              <div class="d-flex align-items-center justify-content-between">
-                  <button id="btnoeufmollet" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Détails</button>
-                  <h6>15.00€</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-  </section>
+</div>
+       
 
   <!-- Section 4: Parcourez toutes les recettes -->
   <div class="parallax mt-5" style="background-image: url('./images/restaurant.jpeg');">
@@ -609,12 +370,29 @@
 </div>
 
 
-<!-- Notification de Favoris -->
-<div class="toast-container bg-sucesse position-fixed top-0 end-0 p-3 mt-5">
-  <div id="nourritureEnFavori" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-body border border-success rounded">
-      <i class="bi bi-star-fill text-warning"></i>
-      Recette rajoutée au favori avec succées !
+<!-- FAVOSRIS -->
+<!-- Notification de Favoris Rajouter -->
+<div class="toast-container position-fixed top-0 end-0 p-3 mt-5">
+  <div id="nourritureEnFavori1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body border border-success rounded d-flex align-items-center justify-content-between">
+      <div class="notif-ajout">
+        <i class="bi bi-star-fill text-warning"></i>
+        Recette rajoutée au favori avec succès ! <a href="./favoris.html"><span class="text-tangerin">Voir</span></a>
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
+<!-- Notification de Favoris Enlever -->
+<div class="toast-container position-fixed top-0 end-0 p-3 mt-5">
+  <div id="nourritureEnFavori2" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body border border-danger rounded d-flex align-items-center justify-content-between">
+      <div class="notif-enlever">
+        <i class="bi bi-star text-warning"></i>
+        Recette retirée de votre favori !
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
   </div>
 </div>
@@ -622,17 +400,40 @@
 
 
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const toastTrigger = document.getElementById('nourritureEnFavoriBtn');
-    const toastLiveExample = document.getElementById('nourritureEnFavori');
 
-    if (toastTrigger && toastLiveExample) {
-      const toastBootstrap = new bootstrap.Toast(toastLiveExample);
-      toastTrigger.addEventListener('click', () => {
-        toastBootstrap.show();
+<script>
+ document.addEventListener('DOMContentLoaded', function() {
+      const addButtons = document.querySelectorAll('.addToFavoritesBtn');
+      const toast1 = document.getElementById('nourritureEnFavori1');
+      const toast2 = document.getElementById('nourritureEnFavori2');
+  
+      addButtons.forEach(addButton => {
+          const buttonId = addButton.dataset.buttonId;
+          let isAdded = localStorage.getItem(buttonId) === 'true';
+  
+          updateButtonAppearance(addButton, isAdded);
+  
+          addButton.addEventListener('click', function() {
+              isAdded = !isAdded;
+              updateButtonAppearance(addButton, isAdded);
+              localStorage.setItem(buttonId, isAdded ? 'true' : 'false');
+  
+              // Afficher le toast correspondant en fonction de l'action effectuée
+              const toast = isAdded ? toast1 : toast2;
+              const toastBootstrap = new bootstrap.Toast(toast);
+              toastBootstrap.show();
+          });
       });
-    }
+  
+      function updateButtonAppearance(button, isAdded) {
+          if (isAdded) {
+              button.classList.remove('bi-star');
+              button.classList.add('bi-star-fill');
+          } else {
+              button.classList.remove('bi-star-fill');
+              button.classList.add('bi-star');
+          }
+      }
   });
 </script>
 

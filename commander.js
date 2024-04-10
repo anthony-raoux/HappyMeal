@@ -29,8 +29,6 @@ function renderRecipes() {
                 <img class="card-img-top" src="${recipe.image}" alt="${recipe.nom}">
                 <div class="card-body">
                     <h5 class="card-title">${recipe.nom}</h5>
-                    <p class="card-text"><strong>Catégorie:</strong> ${recipe.categorie}</p>
-                    <p class="card-text"><strong>Temps de préparation:</strong> ${recipe.temps_preparation}</p>
                     <h6 class="card-subtitle mb-2 text-muted">Ingrédients:</h6>
                     <ul class="list-group list-group-flush">
                         ${recipe.ingredients.map((ingredient, index) => `
@@ -41,10 +39,6 @@ function renderRecipes() {
                             </li>
                         `).join('')}
                     </ul>
-                    <h6 class="card-subtitle mb-2 text-muted mt-3">Étapes:</h6>
-                    <ol class="card-text">
-                        ${recipe.etapes.map(step => `<li>${step}</li>`).join('')}
-                    </ol>
                 </div>
             </div>
         `;
@@ -66,6 +60,19 @@ function openShoppingListModal() {
     }
 
     $(shoppingListModal).modal('show');
+    updateShoppingList(); // Mettre à jour la liste de courses après l'ouverture du modal
+}
+
+function updateShoppingList() {
+    const shoppingListElement = document.getElementById('shoppingList');
+    shoppingListElement.innerHTML = '';
+
+    for (const [ingredient, quantity] of Object.entries(shoppingList)) {
+        const li = document.createElement('li');
+        li.classList.add('list-group-item');
+        li.textContent = `${ingredient} - ${quantity}`;
+        shoppingListElement.appendChild(li);
+    }
 }
 
 function generateShoppingList() {
@@ -101,12 +108,12 @@ function removeIngredient(ingredientName) {
             delete shoppingList[ingredientName];
         }
     }
-    openShoppingListModal(); // Rafraîchir la liste après la suppression
+    updateShoppingList(); // Rafraîchir la liste après la suppression
 }
 
 function clearShoppingList() {
     shoppingList = {};
-    renderRecipes();
+    updateShoppingList(); // Rafraîchir la liste après avoir vidé la liste de courses
 }
 
 let recipes;

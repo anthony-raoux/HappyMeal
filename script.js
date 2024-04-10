@@ -1,4 +1,4 @@
-// AUTOCLETION
+// système d’autocomplétion
 document.addEventListener("DOMContentLoaded", function() {
   // Récupération des données du fichier JSON
   fetch('data.json')
@@ -58,7 +58,60 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
+        // Fonction pour récupérer les données JSON
+        async function fetchRecettes() {
+            try {
+                // Récupérer les données JSON depuis le serveur
+                const response = await fetch('data.json');
+                const recettesJson = await response.json();
+                
+                // Appeler la fonction pour afficher une recette aléatoire
+                recetteAleatoire(recettesJson);
+            } catch (error) {
+                console.error('Erreur lors du chargement des données:', error);
+            }
+        }
 
+        // Fonction pour sélectionner une recette aléatoire
+        function recetteAleatoire(recettesJson) {
+            // Sélectionner une recette aléatoirement
+            const recettes = recettesJson.recettes;
+            const recetteAleatoire = recettes[Math.floor(Math.random() * recettes.length)];
+
+            // Construction du HTML pour afficher la recette
+            let recetteHTML = `
+                <img src="${recetteAleatoire.image}" alt="${recetteAleatoire.nom}">
+                <h2>${recetteAleatoire.nom}</h2>
+                <p><strong>Catégorie:</strong> ${recetteAleatoire.categorie}</p>
+                <p><strong>Temps de préparation:</strong> ${recetteAleatoire.temps_preparation}</p>
+                <h3>Ingrédients:</h3>
+                <ul>
+            `;
+
+            // Ajouter les ingrédients à la liste
+            recetteAleatoire.ingredients.forEach(ingredient => {
+                recetteHTML += `<li>${ingredient.nom}: ${ingredient.quantite}</li>`;
+            });
+
+            // Ajouter les étapes de préparation
+            recetteHTML += `</ul>
+                <h3>Étapes:</h3>
+                <ol>
+            `;
+            recetteAleatoire.etapes.forEach(etape => {
+                recetteHTML += `<li>${etape}</li>`;
+            });
+
+            // Fermer les balises ouvertes
+            recetteHTML += `</ol>`;
+
+            // Afficher la recette dans le div avec l'id "recette"
+            document.getElementById('recette').innerHTML = recetteHTML;
+        }
+
+        // Appeler la fonction pour récupérer les données JSON et afficher une recette aléatoire
+        window.onload = fetchRecettes;
+ 
 
 
 
