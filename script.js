@@ -1,122 +1,62 @@
-const foodItems = [
-    "Pizza Margherita",
-    "Spaghetti Bolognese",
-    "Sushi",
-    "Hamburger",
-    "Tacos",
-    "Pad Thai",
-    "Chicken Tikka Masala",
-    "Lasagne",
-    "Croissant",
-    "Samosa",
-    "Pho",
-    "Gyoza",
-    "Fish and Chips",
-    "Caesar Salad",
-    "Moussaka",
-    "Ramen",
-    "Poutine",
-    "Peking Duck",
-    "Pierogi",
-    "Goulash",
-    "Falafel",
-    "Schnitzel",
-    "Tiramisu",
-    "Ceviche",
-    "Kimchi",
-    "Pancakes",
-    "Shawarma",
-    "Pasta Carbonara",
-    "Beef Stroganoff",
-    "Sashimi",
-    "Fajitas",
-    "Ratatouille",
-    "Paella",
-    "Bruschetta",
-    "Guacamole",
-    "Empanadas",
-    "Fondue",
-    "Eggs Benedict",
-    "Philly Cheesesteak",
-    "Miso Soup",
-    "Peking Duck",
-    "Hummus"
-  ];
+// AUTOCLETION
+document.addEventListener("DOMContentLoaded", function() {
+  // Récupération des données du fichier JSON
+  fetch('data.json')
+      .then(response => response.json())
+      .then(data => {
+          const recettes = data.recettes;
 
-  const input = document.getElementById('myInput');
-  const autocompleteContainer = document.getElementById('autocompleteContainer');
+          // Écoute des événements de saisie dans la barre de recherche
+          const input = document.getElementById('myInput');
+          input.addEventListener('input', function(event) {
+              const searchTerm = event.target.value.toLowerCase();
 
-  input.addEventListener('input', function() {
-    closeAllLists();
-    const val = this.value;
-    if (!val) { return false; }
-    for (let i = 0; i < foodItems.length; i++) {
-      if (foodItems[i].substr(0, val.length).toUpperCase() === val.toUpperCase()) {
-        const item = document.createElement('button');
-        item.classList.add('list-group-item');
-        item.classList.add('list-group-item-action');
-        item.textContent = foodItems[i];
-        item.addEventListener('click', function() {
-          input.value = this.textContent;
-          closeAllLists();
-        });
-        autocompleteContainer.appendChild(item);
-      }
-    }
-  });
+              // Filtrage des résultats en fonction du terme de recherche
+              const filteredRecettes = recettes.filter(recette =>
+                  recette.nom.toLowerCase().includes(searchTerm)
+              );
 
-  input.addEventListener('keydown', function(e) {
-    const x = autocompleteContainer.querySelectorAll('.list-group-item');
-    if (e.keyCode === 40) { // Down arrow
-      if (x.length > 0) {
-        const activeItem = autocompleteContainer.querySelector('.list-group-item.active');
-        if (activeItem) {
-          activeItem.classList.remove('active');
-          const nextItem = activeItem.nextElementSibling;
-          if (nextItem) {
-            nextItem.classList.add('active');
-          }
-        } else {
-          const firstItem = autocompleteContainer.querySelector('.list-group-item');
-          if (firstItem) {
-            firstItem.classList.add('active');
-          }
-        }
-      }
-    } else if (e.keyCode === 38) { // Up arrow
-      if (x.length > 0) {
-        const activeItem = autocompleteContainer.querySelector('.list-group-item.active');
-        if (activeItem) {
-          activeItem.classList.remove('active');
-          const prevItem = activeItem.previousElementSibling;
-          if (prevItem) {
-            prevItem.classList.add('active');
-          }
-        }
-      }
-    } else if (e.keyCode === 13) { // Enter
-      if (x.length > 0) {
-        const activeItem = autocompleteContainer.querySelector('.list-group-item.active');
-        if (activeItem) {
-          input.value = activeItem.textContent;
-          closeAllLists();
-        }
-      }
-    }
-  });
+              // Affichage des résultats filtrés dans la liste déroulante
+              const autocompleteContainer = document.getElementById('autocompleteContainer');
+              autocompleteContainer.innerHTML = '';
+              filteredRecettes.forEach(recette => {
+                  const listItem = document.createElement('a');
+                  listItem.classList.add('list-group-item');
+                  listItem.href = '#';
+                  listItem.textContent = recette.nom;
+                  listItem.dataset.id = recette.id;
+                  autocompleteContainer.appendChild(listItem);
 
-  function closeAllLists() {
-    while (autocompleteContainer.firstChild) {
-      autocompleteContainer.removeChild(autocompleteContainer.firstChild);
-    }
+                  // Ajout de l'écouteur d'événement pour charger la recette au clic sur un élément de l'autocomplétion
+                  listItem.addEventListener('click', function() {
+                      chargerRecette(recette.nom);
+                  });
+              });
+          });
+      })
+      .catch(error => console.error('Erreur lors de la récupération des données JSON :', error));
+
+  // Fonction pour charger les recettes depuis le fichier JSON
+  function chargerRecette(nomRecette) {
+      fetch('data.json')
+          .then(response => response.json())
+          .then(data => {
+              const recette = data.recettes.find(recette => recette.nom === nomRecette);
+              if (recette) {
+                  afficherRecette(recette);
+              } else {
+                  console.error(`Recette "${nomRecette}" non trouvée.`);
+              }
+          })
+          .catch(error => console.error('Erreur lors du chargement des données JSON :', error));
   }
 
-  document.getElementById('searchButton').addEventListener('click', function() {
-    const searchTerm = input.value;
-    // Effectuer une action avec le terme de recherche (par exemple, recherche sur une base de données, redirection vers une autre page, etc.)
-    console.log('Recherche effectuée avec le terme :', searchTerm);
-  });
-
+  // Fonction pour afficher la recette sélectionnée
+  function afficherRecette(recette) {
+      // Rediriger vers la page recette.html avec les détails de la recette sélectionnée
+      window.location.href = `recette.html?nom=${encodeURIComponent(recette.nom)}&categorie=${encodeURIComponent(recette.categorie)}&temps_preparation=${encodeURIComponent(recette.temps_preparation)}&ingredients=${encodeURIComponent(JSON.stringify(recette.ingredients))}&etapes=${encodeURIComponent(JSON.stringify(recette.etapes))}`;
+  }
+});
 
 
 
