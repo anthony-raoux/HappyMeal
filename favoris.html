@@ -109,55 +109,72 @@
 
     <body style="padding-bottom: 150px;">
 
- <!-- Conteneur pour afficher les données de la recette -->
- <div id="recette1Container" class="container mt-5"></div>
+<!-- Conteneur pour afficher les données de la recette -->
+<div id="recetteContainer" class="container mt-5">
+  <!-- Les données de recette seront ajoutées ici en utilisant AJAX -->
+</div>
 
- <!-- Script JavaScript -->
- <script>
-     // Récupère les données de la recette 1 depuis le localStorage
-     var recette1Data = JSON.parse(localStorage.getItem('recette1'));
+<!-- Ajouter les notifications de favoris -->
+<div id="notificationFavoris" class="toast-container position-fixed top-0 end-0 p-3 mt-5">
+</div>
 
-     if (recette1Data) {
-         // Créer un élément div pour afficher les données de la recette 1
-         var recette1Div = document.createElement('div');
-         recette1Div.classList.add('card', 'p-3');
-         recette1Div.innerHTML = `
-             <h2>${recette1Data.titre}</h2>
-             <img src="${recette1Data.image}" class="img-fluid mb-3" alt="Image de la recette">
-             <p class="mb-2">Prix : ${recette1Data.prix}</p>
-             <button id="supprimerRecette1Btn" class="btn btn-danger">Supprimer la recette 1</button>
-         `;
-         document.getElementById('recette1Container').appendChild(recette1Div);
 
-         // Ajouter un écouteur d'événements au bouton de suppression de la recette
-         document.getElementById('supprimerRecette1Btn').addEventListener('click', function(event) {
-             // Empêcher le comportement par défaut du bouton
-             event.preventDefault();
+<script>
+// Récupère les données de recette depuis le localStorage
+var recetteData = JSON.parse(localStorage.getItem('recette1'));
 
-             // Supprimer les données de la recette 1 du localStorage
-             localStorage.removeItem('recette1');
-             afficherMessage('Recette 1 supprimée du localStorage.', 'success');
-             // Rediriger l'utilisateur vers la page précédente après la suppression
-             window.history.back();
-         });
-     } else {
-         // Si les données n'existent pas, afficher un message indiquant que la recette n'est pas disponible
-         document.getElementById('recette1Container').innerHTML = '<div class="alert alert-warning">La recette 1 n\'est pas disponible.</div>';
-     }
+if (recetteData) {
+    // Afficher les données de recette
+    afficherRecette(recetteData);
+} else {
+    // Afficher un message si aucune recette n'est disponible
+    document.getElementById('recetteContainer').innerHTML = '<div class="alert alert-warning">Aucune recette disponible.</div>';
+}
 
-     // Fonction pour afficher un message
-     function afficherMessage(message, type) {
-         var alertMessage = document.createElement('div');
-         alertMessage.classList.add('alert', 'alert-' + type);
-         alertMessage.textContent = message;
-         document.body.appendChild(alertMessage);
+// Fonction pour afficher une recette
+function afficherRecette(data) {
+    var recetteDiv = document.createElement('div');
+    recetteDiv.classList.add('card', 'p-3');
+    recetteDiv.innerHTML = `
+        <h2>${data.titre}</h2>
+        <img src="${data.image}" class="img-fluid mb-3" alt="Image de la recette">
+        <p class="mb-2">Prix : ${data.prix}</p>
+        <button id="supprimerRecetteBtn" class="btn btn-danger">Supprimer la recette</button>
+    `;
+    document.getElementById('recetteContainer').appendChild(recetteDiv);
 
-         // Masquer le message après quelques secondes
-         setTimeout(function() {
-             alertMessage.style.display = 'none';
-         }, 3000); // 3000 millisecondes = 3 secondes
-     }
- </script>
+    // Ajouter un écouteur d'événements au bouton de suppression de la recette
+    document.getElementById('supprimerRecetteBtn').addEventListener('click', function(event) {
+        event.preventDefault();
+        localStorage.removeItem('recette1');
+        afficherNotification('Recette supprimée du localStorage.', 'warning');
+        recetteDiv.remove();
+    });
+}
+
+// Fonction pour afficher une notification
+function afficherNotification(message, type) {
+    var notification = document.createElement('div');
+    notification.classList.add('toast', 'show');
+    notification.innerHTML = `
+        <div class="toast-header bg-${type} text-white">
+            <strong class="me-auto">Notification</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+        </div>
+        <div class="toast-body">${message}</div>
+    `;
+    document.getElementById('notificationFavoris').appendChild(notification);
+
+    // Masquer la notification après quelques secondes
+    setTimeout(function() {
+        notification.classList.remove('show');
+        setTimeout(function() {
+            notification.remove();
+        }, 500);
+    }, 3000);
+}
+
+</script>
 
     <a href="./test.html">Revenir à la page 1</a>
 

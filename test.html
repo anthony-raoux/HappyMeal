@@ -153,22 +153,28 @@
 
 <!-- Recette 1 -->
 <div class="col">
-    <div class="card" data-card-id="recette1">
-        <img id="imageRecette1" src="./images/risotto_aux_champignons.png" class="card-img-top" alt="voila">
-        <div class="card-body">
-            <div class="d-flex align-items-center justify-content-between">
-                <h5 id="titreRecette1" class="card-title">Risotto aux champignons</h5>
-                <button id="btnRecette1">Sauvegarder la recette 1</button>
-            </div>
-            <div class="d-flex align-items-center justify-content-between">
-                <button id="btnSaladeQuinoa" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Primary</button>
-                <h6 id="prixRecette1">15.00€</h6>
-            </div>
-        </div>
-    </div>
+  <div class="card" data-card-id="recette1">
+      <img id="imageRecette1" src="./images/risotto_aux_champignons.png" class="card-img-top" alt="Image de la recette">
+      <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between">
+              <h5 id="titreRecette1" class="card-title">Risotto aux champignons</h5>
+              <button id="btnRecette1" class="btn btn-primary">Sauvegarder la recette 1</button>
+              <i class="bi bi-star text-warning"></i>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+              <button id="btnSaladeQuinoa" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Primary</button>
+              <h6 id="prixRecette1">15.00€</h6>
+          </div>
+      </div>
+  </div>
 </div>
 
-<div id="alertMessage" class="alert alert-success" style="display: none;"></div>
+
+<!-- Ajouter les notifications de favoris -->
+<div id="notificationFavoris" class="toast-container position-fixed top-0 end-0 p-3 mt-5">
+</div>
+
+
 
 
 <!-- JavaScript -->
@@ -178,20 +184,15 @@ var btnRecette1 = document.getElementById('btnRecette1');
 
 // Ajoute un écouteur d'événements au bouton de la recette 1
 btnRecette1.addEventListener('click', function(event) {
-    // Empêcher le comportement par défaut du bouton
     event.preventDefault();
 
-    // Récupère les données de la recette 1 depuis le localStorage
     var recette1Data = JSON.parse(localStorage.getItem('recette1'));
 
     if (recette1Data) {
-        // Si les données existent, supprime-les du localStorage
         localStorage.removeItem('recette1');
-        afficherMessage('Recette 1 supprimée du localStorage.', 'success');
-        // Change le texte du bouton pour indiquer qu'il peut sauvegarder la recette
+        afficherNotification('Recette 1 supprimée du localStorage.', 'danger');
         btnRecette1.textContent = 'Sauvegarder la recette 1';
     } else {
-        // Si les données n'existent pas, sauvegarde-les dans le localStorage
         var image = document.getElementById('imageRecette1').src;
         var titre = document.getElementById('titreRecette1').textContent;
         var prix = document.getElementById('prixRecette1').textContent;
@@ -201,25 +202,33 @@ btnRecette1.addEventListener('click', function(event) {
             titre: titre,
             prix: prix
         }));
-        afficherMessage('Recette 1 sauvegardée dans le localStorage.', 'success');
-        // Change le texte du bouton pour indiquer qu'il peut supprimer la recette
+        afficherNotification('Recette 1 sauvegardée dans le localStorage.', 'success');
         btnRecette1.textContent = 'Supprimer la recette 1';
     }
 });
 
-// Fonction pour afficher un message
-function afficherMessage(message, type) {
-    var alertMessage = document.getElementById('alertMessage');
-    alertMessage.textContent = message;
-    alertMessage.classList.add('alert-' + type);
-    alertMessage.style.display = 'block';
+// Fonction pour afficher une notification
+function afficherNotification(message, type) {
+    var notification = document.createElement('div');
+    notification.classList.add('toast', 'show');
+    notification.innerHTML = `
+        <div class="toast-header bg-${type} text-white">
+            <strong class="me-auto">Notification</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+        </div>
+        <div class="toast-body">${message}</div>
+    `;
+    document.getElementById('notificationFavoris').appendChild(notification);
 
-    // Masquer le message après quelques secondes
+    // Masquer la notification après quelques secondes
     setTimeout(function() {
-        alertMessage.style.display = 'none';
-        alertMessage.classList.remove('alert-' + type);
-    }, 3000); // 3000 millisecondes = 3 secondes
+        notification.classList.remove('show');
+        setTimeout(function() {
+            notification.remove();
+        }, 500);
+    }, 3000);
 }
+
 
 </script>
 
@@ -282,7 +291,12 @@ function afficherMessage(message, type) {
         });
     });
 });
+
+// Supprimer les données de la recette 1 du localStorage
+// localStorage.removeItem('recette2');
+
 </script>
+
 
 
   <!-- Bootstrap JavaScript et dépendances -->
