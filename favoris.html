@@ -85,6 +85,15 @@
     height: 50vh;
     background-position: center;
   }
+
+  .nav-item:hover {
+      background-color: #F5DDC4;
+      border-radius: 5px;
+  } 
+
+  .loupe:hover {
+    color: #F48E28;
+  } 
 </style>
 
     <header>
@@ -105,19 +114,19 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav me-auto">
               <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="./index.html">Accueil</a>
+                  <a class="nav-link" aria-current="page" href="./index.html">Accueil</a>
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="./recette.html">Recettes</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="./favoris.html">Favoris</a>
+                  <a class="nav-link fw-bold active" href="./favoris.html">Favoris</a>
               </li>
           </ul>
 
           <!-- Icon recherche dans une modal -->
           <div class="recherche mx-3 my-3">
-            <i class="bi bi-search" data-bs-toggle="modal" data-bs-target="#modalDeRecherche"></i>
+            <i class="loupe bi bi-search" data-bs-toggle="modal" data-bs-target="#modalDeRecherche"></i>
           </div>
           
           
