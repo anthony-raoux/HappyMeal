@@ -178,6 +178,23 @@
   </div>
 </div>
 
+<div class="col">
+  <div class="card" data-card-id="recette2">
+      <img id="imageRecette2" src="./images/risotto_aux_champignons.png" class="card-img-top" alt="Image de la recette">
+      <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between">
+              <h5 id="titreRecette2" class="card-title">Risotto aux champignons</h5>
+              <button id="btnRecette2" class="btn btn-primary">Sauvegarder la recette 2</button>
+              <i class="bi bi-star text-warning"></i>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+              <button id="btnSaladeQuinoa" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Primary</button>
+              <h6 id="prixRecette2">15.00€</h6>
+          </div>
+      </div>
+  </div>
+</div>
+
 
 <!-- Ajouter les notifications de favoris -->
 <div id="notificationFavoris" class="toast-container position-fixed top-0 end-0 p-3 mt-5">
@@ -188,55 +205,60 @@
 
 <!-- JavaScript -->
 <script>
-// Sélectionne le bouton de la recette 1
-var btnRecette1 = document.getElementById('btnRecette1');
+document.addEventListener('DOMContentLoaded', function() {
+    // Sélectionne tous les boutons de sauvegarde de recette
+    var btnRecettes = document.querySelectorAll('[id^="btnRecette"]');
 
-// Ajoute un écouteur d'événements au bouton de la recette 1
-btnRecette1.addEventListener('click', function(event) {
-    event.preventDefault();
+    // Ajoute un écouteur d'événements à chaque bouton de sauvegarde de recette
+    btnRecettes.forEach(function(btnRecette) {
+        btnRecette.addEventListener('click', function(event) {
+            event.preventDefault();
 
-    var recette1Data = JSON.parse(localStorage.getItem('recette1'));
+            var recetteId = btnRecette.id.replace('btnRecette', '');
+            var recetteData = JSON.parse(localStorage.getItem('recette' + recetteId));
 
-    if (recette1Data) {
-        localStorage.removeItem('recette1');
-        afficherNotification('Recette 1 supprimée du localStorage.', 'danger');
-        btnRecette1.textContent = 'Sauvegarder la recette 1';
-    } else {
-        var image = document.getElementById('imageRecette1').src;
-        var titre = document.getElementById('titreRecette1').textContent;
-        var prix = document.getElementById('prixRecette1').textContent;
+            if (recetteData) {
+                localStorage.removeItem('recette' + recetteId);
+                afficherNotification('Recette ' + recetteId + ' supprimée du localStorage.', 'danger');
+                btnRecette.textContent = 'Sauvegarder la recette ' + recetteId;
+            } else {
+                var image = document.getElementById('imageRecette' + recetteId).src;
+                var titre = document.getElementById('titreRecette' + recetteId).textContent;
+                var prix = document.getElementById('prixRecette' + recetteId).textContent;
 
-        localStorage.setItem('recette1', JSON.stringify({
-            image: image,
-            titre: titre,
-            prix: prix
-        }));
-        afficherNotification('Recette 1 sauvegardée dans le localStorage.', 'success');
-        btnRecette1.textContent = 'Supprimer la recette 1';
+                localStorage.setItem('recette' + recetteId, JSON.stringify({
+                    image: image,
+                    titre: titre,
+                    prix: prix
+                }));
+                afficherNotification('Recette ' + recetteId + ' sauvegardée dans le localStorage.', 'success');
+                btnRecette.textContent = 'Supprimer la recette ' + recetteId;
+            }
+        });
+    });
+
+    // Fonction pour afficher une notification
+    function afficherNotification(message, type) {
+        var notification = document.createElement('div');
+        notification.classList.add('toast', 'show');
+        notification.innerHTML = `
+            <div class="toast-header bg-${type} text-white">
+                <strong class="me-auto">Notification</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">${message}</div>
+        `;
+        document.getElementById('notificationFavoris').appendChild(notification);
+
+        // Masquer la notification après quelques secondes
+        setTimeout(function() {
+            notification.classList.remove('show');
+            setTimeout(function() {
+                notification.remove();
+            }, 500);
+        }, 3000);
     }
 });
-
-// Fonction pour afficher une notification
-function afficherNotification(message, type) {
-    var notification = document.createElement('div');
-    notification.classList.add('toast', 'show');
-    notification.innerHTML = `
-        <div class="toast-header bg-${type} text-white">
-            <strong class="me-auto">Notification</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
-        </div>
-        <div class="toast-body">${message}</div>
-    `;
-    document.getElementById('notificationFavoris').appendChild(notification);
-
-    // Masquer la notification après quelques secondes
-    setTimeout(function() {
-        notification.classList.remove('show');
-        setTimeout(function() {
-            notification.remove();
-        }, 500);
-    }, 3000);
-}
 
 
 </script>

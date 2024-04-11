@@ -79,7 +79,7 @@
   }
 
   .acceuil-favoris {
-    background-image: linear-gradient(to top, rgba(255, 255, 255, 0.925), rgba(255, 255, 255, 0)),
+    background-image: linear-gradient(to top, rgb(255, 255, 255), rgba(255, 255, 255, 0)),
     url('images/restaurant.jpeg');
     width: auto;
     height: 50vh;
@@ -147,78 +147,93 @@
 
 
       <div class="container">
-
-          <!-- Conteneur pour afficher les données de la recette -->
-          <div id="recetteContainer" class="container mt-5">
-            <!-- Les données de recette seront ajoutées ici en utilisant AJAX -->
-          </div>
-
-          <!-- Ajouter les notifications de favoris -->
-          <div id="notificationFavoris" class="toast-container position-fixed top-0 end-0 p-3 mt-5">
-          </div>
-
-
-          <a href="./test.html"> --> Page test</a>
-      </div>
-
-
-
-<script>
-// Récupère les données de recette depuis le localStorage
-var recetteData = JSON.parse(localStorage.getItem('recette1'));
-
-if (recetteData) {
-    // Afficher les données de recette
-    afficherRecette(recetteData);
-} else {
-    // Afficher un message si aucune recette n'est disponible
-    document.getElementById('recetteContainer').innerHTML = '<div class="alert alert-warning">Aucune recette disponible.</div>';
-}
-
-// Fonction pour afficher une recette
-function afficherRecette(data) {
-    var recetteDiv = document.createElement('div');
-    recetteDiv.classList.add('card', 'p-3');
-    recetteDiv.innerHTML = `
-        <h2>${data.titre}</h2>
-        <img src="${data.image}" class="img-fluid mb-3" alt="Image de la recette">
-        <p class="mb-2">Prix : ${data.prix}</p>
-        <button id="supprimerRecetteBtn" class="btn btn-danger">Supprimer la recette</button>
-    `;
-    document.getElementById('recetteContainer').appendChild(recetteDiv);
-
-    // Ajouter un écouteur d'événements au bouton de suppression de la recette
-    document.getElementById('supprimerRecetteBtn').addEventListener('click', function(event) {
-        event.preventDefault();
-        localStorage.removeItem('recette1');
-        afficherNotification('Recette supprimée du localStorage.', 'warning');
-        recetteDiv.remove();
-    });
-}
-
-// Fonction pour afficher une notification
-function afficherNotification(message, type) {
-    var notification = document.createElement('div');
-    notification.classList.add('toast', 'show');
-    notification.innerHTML = `
-        <div class="toast-header bg-${type} text-white">
-            <strong class="me-auto">Notification</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+        <!-- Conteneur pour afficher les données de la recette -->
+        <div id="recetteContainer" class="container mt-5"></div>
+    
+        <!-- Ajouter les notifications de favoris -->
+        <div id="notificationFavoris" class="toast-container position-fixed top-0 end-0 p-3 mt-5"></div>
+    
+        <!-- Alertes Bootstrap pour aucun recette -->
+        <div id="noRecipeAlert" class="alert alert-warning d-none" role="alert">
+            Aucune recette disponible.
         </div>
-        <div class="toast-body">${message}</div>
-    `;
-    document.getElementById('notificationFavoris').appendChild(notification);
-
-    // Masquer la notification après quelques secondes
-    setTimeout(function() {
-        notification.classList.remove('show');
-        setTimeout(function() {
-            notification.remove();
-        }, 500);
-    }, 3000);
-}
-
-</script>
+    
+        <!-- Alertes Bootstrap pour toutes les recettes supprimées -->
+        <div id="allRecipesDeletedAlert" class="alert alert-info d-none" role="alert">
+            Toutes les recettes ont été supprimées.
+        </div>
+    
+        <a href="./test.html">Retour à la page test</a>
+    </div>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const recetteContainer = document.getElementById('recetteContainer');
+        const notificationFavoris = document.getElementById('notificationFavoris');
+        const noRecipeAlert = document.getElementById('noRecipeAlert');
+        const allRecipesDeletedAlert = document.getElementById('allRecipesDeletedAlert');
+    
+        // Récupérer toutes les clés du localStorage
+        const allRecipeKeys = Object.keys(localStorage);
+    
+        if (allRecipeKeys.length > 0) {
+            allRecipeKeys.forEach(key => {
+                const recipeData = JSON.parse(localStorage.getItem(key));
+                afficherRecette(recipeData, key);
+            });
+        } else {
+            afficherAucuneRecetteAlert();
+        }
+    
+        function afficherRecette(data, key) {
+            var recetteDiv = document.createElement('div');
+            recetteDiv.classList.add('card', 'p-3');
+            recetteDiv.innerHTML = `
+                <h2>${data.titre}</h2>
+                <img src="${data.image}" class="img-fluid mb-3" alt="Image de la recette">
+                <p class="mb-2">Prix : ${data.prix}</p>
+                <button class="btn btn-danger btn-delete-recipe" data-recipe-id="${key}">Supprimer la recette</button>
+            `;
+            recetteContainer.appendChild(recetteDiv);
+    
+            document.querySelector(`[data-recipe-id="${key}"]`).addEventListener('click', function(event) {
+                event.preventDefault();
+                localStorage.removeItem(key);
+                afficherNotification(`Recette supprimée du localStorage.`, 'warning');
+                recetteDiv.remove();
+    
+                if (Object.keys(localStorage).length === 0) {
+                    afficherAucuneRecetteAlert();
+                }
+            });
+        }
+    
+        function afficherAucuneRecetteAlert() {
+            noRecipeAlert.classList.remove('d-none');
+        }
+    
+        function afficherNotification(message, type) {
+            var notification = document.createElement('div');
+            notification.classList.add('toast', 'show');
+            notification.innerHTML = `
+                <div class="toast-header bg-${type} text-white">
+                    <strong class="me-auto">Notification</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                </div>
+                <div class="toast-body">${message}</div>
+            `;
+            notificationFavoris.appendChild(notification);
+    
+            setTimeout(function() {
+                notification.classList.remove('show');
+                setTimeout(function() {
+                    notification.remove();
+                }, 500);
+            }, 3000);
+        }
+    });
+    </script>
+    
 
 
 </body>        
