@@ -1,4 +1,4 @@
-// AUTOCLETION
+// AUTOCONPLETION
 document.addEventListener("DOMContentLoaded", function() {
   // Récupération des données du fichier JSON
   fetch('data.json')
