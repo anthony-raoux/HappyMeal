@@ -62,61 +62,96 @@
     display: block; /* Assure que l'image est affichée en tant que bloc */
     object-fit: cover; /* Ajuste l'image pour remplir la zone sans déformation */
     object-position: center; /* Ce{ntre l'image horizontalement */
-}
+  }
 
-.list-group-item  {
-  background: #F5DDC4;
-  color: #000;
-  border: #000 1px solid;
-}
-.list-group-item:hover {
-  background: #F48E28;
-  color: #FFF;
-}
-.list-group-item:active {
-  background: #F48E28;
-  color: #FFF;
-}
+  .list-group-item  {
+    background: #F5DDC4;
+    color: #000;
+    border: #000 1px solid;
+  }
+  .list-group-item:hover {
+    background: #F48E28;
+    color: #FFF;
+  }
+  .list-group-item:active {
+    background: #F48E28;
+    color: #FFF;
+  }
 
-
-.parallax {
-      position: relative;
-      background-attachment: fixed;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      height: 25vh;
-    }
-    .parallax-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* Couleur de l'overlay */
-    }
-    .parallax-content {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 50px 0;
-      color: white;
-    }
-
+  .acceuil-favoris {
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 0.925), rgba(255, 255, 255, 0)),
+    url('images/restaurant.jpeg');
+    width: auto;
+    height: 50vh;
+    background-position: center;
+  }
 </style>
 
+    <header>
+      <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white fixed-top border-bottom border-dark">
+      <div class="container">
+        <!-- Logo -->
+        <div class="navbar-brand" href="#">
+            <img src="./images/logo_w.png" alt="Logo" style="width: 50px;">
+        </div>
+        
+        <!-- Navbar Responsive  -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- Liens du Navbar -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="./index.html">Accueil</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="./recette.html">Recettes</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="./favoris.html">Favoris</a>
+              </li>
+          </ul>
+
+          <!-- Icon recherche dans une modal -->
+          <div class="recherche mx-3 my-3">
+            <i class="bi bi-search" data-bs-toggle="modal" data-bs-target="#modalDeRecherche"></i>
+          </div>
+          
+          
+          <!-- Bar de recherche -->
+          <!-- <div class="d-flex justify-content-center align-items-center gap-3">
+            <input type="text" id="myInput" class="form-control" placeholder="Recherche...">
+            <button class="btn btn-outline-secondary" type="button" id="searchButton">Rechercher</button>
+          </div> -->
+          
+          
+        </div>
+      </div>
+    </nav>
+    </header>
+
+    <body>
+      <div class="acceuil-favoris d-block"></div>
 
 
-    <body style="padding-bottom: 150px;">
+      <div class="container">
 
-<!-- Conteneur pour afficher les données de la recette -->
-<div id="recetteContainer" class="container mt-5">
-  <!-- Les données de recette seront ajoutées ici en utilisant AJAX -->
-</div>
+          <!-- Conteneur pour afficher les données de la recette -->
+          <div id="recetteContainer" class="container mt-5">
+            <!-- Les données de recette seront ajoutées ici en utilisant AJAX -->
+          </div>
 
-<!-- Ajouter les notifications de favoris -->
-<div id="notificationFavoris" class="toast-container position-fixed top-0 end-0 p-3 mt-5">
-</div>
+          <!-- Ajouter les notifications de favoris -->
+          <div id="notificationFavoris" class="toast-container position-fixed top-0 end-0 p-3 mt-5">
+          </div>
+
+
+          <a href="./test.html"> --> Page test</a>
+      </div>
+
 
 
 <script>
@@ -176,7 +211,6 @@ function afficherNotification(message, type) {
 
 </script>
 
-    <a href="./test.html">Revenir à la page 1</a>
 
 </body>        
 
