@@ -80,10 +80,9 @@
 
   .acceuil-favoris {
     background-image: linear-gradient(to top, rgb(255, 255, 255), rgba(255, 255, 255, 0)),
-    url('images/restaurant.jpeg');
+    url('images/restaurant_landing.png');
     width: auto;
     height: 50vh;
-    background-position: center;
   }
 
   .nav-item:hover {
@@ -173,7 +172,7 @@
         const noRecipeAlert = document.getElementById('noRecipeAlert');
         const allRecipesDeletedAlert = document.getElementById('allRecipesDeletedAlert');
     
-        // Récupérer toutes les clés du localStorage
+        
         const allRecipeKeys = Object.keys(localStorage);
     
         if (allRecipeKeys.length > 0) {
