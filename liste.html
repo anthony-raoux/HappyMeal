@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liste de Courses</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top bg-body-tertiary">
+        <div class="container">
+          <!-- Logo -->
+          <a class="navbar-brand" href="#">
+            <img src="./images/logo_w.png" alt="Logo" style="width: 50px;">
+          </a>
+          
+          <!-- Navbar Responsive  -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+          <!-- Liens du Navbar -->
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html">Accueil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="recettes.html">Recettes</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="favoris.html">Favoris</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="liste.html">Liste de courses</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="planning.html">Planning</a>
+              </li>
+            </ul>
+    
+            <!-- Icon recherche dans une modal -->
+            <div class="recherche mx-3 my-3">
+              <i class="bi bi-search" data-bs-toggle="modal" data-bs-target="#modalDeRecherche"></i>
+            </div>
+            
+            
+            <!-- Bar de recherche -->
+            <!-- <div class="d-flex justify-content-center align-items-center gap-3">
+              <input type="text" id="myInput" class="form-control" placeholder="Recherche...">
+              <button class="btn btn-outline-secondary" type="button" id="searchButton">Rechercher</button>
+            </div> -->
+            
+            
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="container mt-5">
+        <h1 class="" style="margin-top: 100px;">Liste de Courses</h1>
+        <div id="liste-courses" class="mt-4 list-group">
+            <!-- Votre liste de courses sera générée ici -->
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+            <button class="btn btn-success me-md-2" onclick="telechargerListeCourses()">Télécharger Liste de Courses</button>
+            <button class="btn btn-danger" onclick="supprimerListeCourses()">Supprimer la liste de courses</button>
+        </div>
+    </div>
+    
+    
+    
+  <script>
+    
+    // Récupérer la liste de courses depuis le stockage local
+    const listeCourses = JSON.parse(localStorage.getItem('listeCourses')) || [];
+
+    // Afficher la liste de courses dans la page
+    const listeCoursesElement = document.getElementById('liste-courses');
+    if (listeCourses.length === 0) {
+      listeCoursesElement.innerHTML = "<p>Aucun élément dans la liste de courses.</p>";
+    } else {
+      const ul = document.createElement('ul');
+      listeCourses.forEach(ingredient => {
+        const li = document.createElement('li');
+        li.textContent = ingredient;
+        ul.appendChild(li);
+      });
+      listeCoursesElement.appendChild(ul);
+    }
+
+    // Fonction pour télécharger la liste de courses
+    function telechargerListeCourses() {
+      const blob = new Blob([listeCourses.join('\n')], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'liste_de_courses.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // Fonction pour supprimer la liste de courses
+    function supprimerListeCourses() {
+      localStorage.removeItem('listeCourses'); // Supprime la liste de courses du stockage local
+      window.location.reload(); // Recharge la page pour refléter les changements
+    }
+  </script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>

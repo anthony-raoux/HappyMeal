@@ -10,6 +10,7 @@
   
   <!-- Boostrap Icon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 </head>
 <header>
@@ -37,6 +38,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Favoris</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="liste.html">Liste de courses</a>
           </li>
         </ul>
 
@@ -75,11 +79,11 @@
 
       // Fonction pour afficher la liste de courses
       function afficherListeCourses() {
-        const listeCourses = ingredientsListe.join('\n');
-        if (listeCourses.trim() === '') {
+        const listeCourses = JSON.parse(localStorage.getItem('listeCourses')) || [];
+        if (listeCourses.length === 0) {
             afficherNotificationErreur('La liste de courses est vide.');
         } else {
-            alert(listeCourses);
+            alert(listeCourses.join('\n'));
         }
     }
 
@@ -121,23 +125,39 @@
         afficherNotification(message, 'danger');
     }
 
-    // Fonction pour ajouter un ingrédient à la liste de courses
-    function ajouterIngredientALaListe(ingredient) {
-        if (!ingredientsListe.includes(ingredient)) {
-            ingredientsListe.push(ingredient);
-            afficherNotificationSucces(`"${ingredient}" a été ajouté à la liste de courses.`);
-        } else {
-            afficherNotificationErreur(`"${ingredient}" est déjà dans la liste de courses.`);
+   // Fonction pour ajouter un ingrédient à la liste de courses
+function ajouterIngredientALaListe(ingredient) {
+    let listeCourses = JSON.parse(localStorage.getItem('listeCourses')) || []; // Récupérer la liste existante ou initialiser une nouvelle liste
+    if (!listeCourses.includes(ingredient)) {
+        listeCourses.push(ingredient); // Ajouter l'ingrédient à la liste existante
+        localStorage.setItem('listeCourses', JSON.stringify(listeCourses)); // Sauvegarder la liste mise à jour dans le stockage local
+        afficherNotificationSucces(`"${ingredient}" a été ajouté à la liste de courses.`);
+    } else {
+        afficherNotificationErreur(`"${ingredient}" est déjà dans la liste de courses.`);
+    }
+}
+
+ // Function to reset the icon of "Ajouter" buttons to 'bi-cart-check'
+function resetAjouterButtonIcons() {
+    const ajouterButtons = document.querySelectorAll('[onclick^="ajouterIngredientALaListe"]');
+    ajouterButtons.forEach(button => {
+        const icon = button.querySelector('.bi');
+        if (icon) {
+            icon.classList.remove('bi-cart-check-fill');
+            icon.classList.add('bi-cart-check');
         }
-    }
+    });
+}
 
-      // Fonction pour supprimer la liste de courses
-      function supprimerListeCourses() {
-        ingredientsListe = []; // Vide le tableau des ingrédients de la liste de courses
-        document.getElementById('liste-courses').innerHTML = ''; // Efface le contenu affiché de la liste de courses
-        afficherNotificationSucces('La liste de courses a été supprimée.');
-    }
-
+// Fonction pour supprimer la liste de courses
+function supprimerListeCourses() {
+    ingredientsListe = []; // Vide le tableau des ingrédients de la liste de courses
+    localStorage.removeItem('listeCourses'); // Supprime la liste de courses du stockage local
+    afficherNotificationSucces('La liste de courses a été supprimée.');
+    
+    // Reset the icon of "Ajouter" buttons
+    resetAjouterButtonIcons();
+}
 
     // Fonction pour supprimer un ingrédient de la liste de courses
     function supprimerIngredientDeLaListe(ingredient) {
@@ -150,6 +170,8 @@
                 ingredientsListe.splice(index, 1);
                 afficherNotificationSucces(`"${ingredient}" a été supprimé de la liste de courses.`);
             }
+            // Met à jour le stockage local
+            localStorage.setItem('listeCourses', JSON.stringify(ingredientsListe));
         } else {
             afficherNotificationErreur(`"${ingredient}" n'est pas dans la liste de courses.`);
         }
@@ -168,8 +190,8 @@
               ${recette.ingredients.map(ingredient => `
                   <li>
                       ${ingredient.nom} : ${ingredient.quantite}
-                      <button class="btn btn-primary btn-sm" onclick="ajouterIngredientALaListe('${ingredient.nom}')">Ajouter</button>
-                      <button class="btn btn-danger btn-sm" onclick="supprimerIngredientDeLaListe('${ingredient.nom}')">Supprimer</button>
+                      <button class="btn text-primary btn-sm" onclick="ajouterIngredientALaListe('${ingredient.nom}')"><i class="bi bi-cart-check"></i></button>
+                      <button class="btn btn-danger btn-sm" onclick="supprimerIngredientDeLaListe('${ingredient.nom}')"><i class="bi bi-cart-dash"></i></button>
                   </li>`
               ).join('')}
           </ul>
@@ -182,11 +204,12 @@
           <button class="btn btn-primary mt-3" onclick="afficherListeCourses()">Voir la liste de courses</button>
       `;
   }
+  
 
   // Fonction pour télécharger la liste de courses
   function telechargerListeCourses() {
-      const listeCourses = ingredientsListe.join('\n');
-      const blob = new Blob([listeCourses], { type: 'text/plain' });
+      const listeCourses = JSON.parse(localStorage.getItem('listeCourses')) || [];
+      const blob = new Blob([listeCourses.join('\n')], { type: 'text/plain' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -203,12 +226,9 @@
   
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./recette.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
