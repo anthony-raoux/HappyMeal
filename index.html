@@ -190,7 +190,7 @@
                   <h5 class="text-white" style="text-shadow: 1px 1px 2px #000;">Salade de quinoa aux légumes grillés</h5>
                 </div>
                 <div class="btn-slider carousel-caption">
-                    <a href="./eroor404.html" class="bouttonSlide text-button btn btn-light text-dark shadow-lg">Découvrire le plat</a>
+                    <a id="btnSaladeQuinoa" href="./eroor404.html" class="bouttonSlide text-button btn btn-light text-dark shadow-lg">Découvrire le plat</a>
                 </div>
             </div>
             
@@ -202,7 +202,7 @@
                   <h5 class="text-white" style="text-shadow: 1px 1px 2px #000;">Tarte aux pommes</h5>
                 </div>
                 <div class="btn-slider carousel-caption">
-                    <a href="./eroor404.html" class="bouttonSlide text-button btn btn-light text-dark shadow-lg">Découvrire le plat</a>
+                    <a id="btnTartePommes" href="./eroor404.html" class="bouttonSlide text-button btn btn-light text-dark shadow-lg">Découvrire le plat</a>
                 </div>
             </div>
             
@@ -257,10 +257,11 @@
   <section class="mt-5">
 
     <div class="container">
-      <h6 class="text-center text-tangerin">Les recettes les plus populaires</h6>
-      <h4 class="display-5 text-center mb-5">Découvrez nos recette </h4>
+      <h4 class="display-5 text-center my-3">Découvrez nos recette les plus populaires</h4>
+      <h6 class="text-center text-tangerin mb-3">
+          <a class="text-tangerin" href="./recette.html">Découvrire plus de recttes<i class="bi bi-arrow-up-right fs-6 mx-1"></i></a>
+      </h6>
       <div class="row row-cols-1 row-cols-md-3 g-3">
-
         <!-- Recette 1 -->
         <div class="col">
           <div class="card" data-card-id="recette1">
@@ -272,7 +273,7 @@
                   </div>
                   <div class="d-flex align-items-center justify-content-between">
                       <button id="btnSaladeQuinoa" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Découvrire la recette</button>
-                      <h6 id="prixRecette1">15.00€</h6>
+                      <!-- <h6 id="prixRecette1">15.00€</h6> -->
                   </div>
               </div>
           </div>
@@ -289,7 +290,7 @@
                   </div>
                   <div class="d-flex align-items-center justify-content-between">
                       <button id="btnSaladeQuinoa" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Découvrire la recette</button>
-                      <h6 id="prixRecette2">15.00€</h6>
+                      <!-- <h6 id="prixRecette2">15.00€</h6> -->
                   </div>
               </div>
           </div>
@@ -305,8 +306,8 @@
                       <i id="btnRecette3" class="bi bi-star text-warning addToFavoritesBtn" data-button-id="recette3"></i>
                   </div>
                   <div class="d-flex align-items-center justify-content-between">
-                      <button id="btnSaladeQuinoa" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Primary</button>
-                      <h6 id="prixRecette3">15.00€</h6>
+                      <button id="btnSaladeQuinoa" type="button" class="bg-tangerin text-white border-0 py-2 px-3 rounded-pill">Découvrire la recette</button>
+                      <!-- <h6 id="prixRecette3">15.00€</h6> -->
                   </div>
               </div>
           </div>
@@ -328,7 +329,7 @@
       </div>
     </div>
   </section>
-  
+
 </body>
 
 
@@ -338,7 +339,7 @@
 
 
       <div class="col-md-3">
-        <h4>Liens de Navigations</h4>
+        <h4>Liens de Navigations<i class="bi bi-arrow-up-right fs-5 mx-1"></i></h4>
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Accueil</a>
@@ -353,7 +354,7 @@
       </div>
 
       <div class="col-md-3">
-        <h4>Horaires</h4>
+        <h4>Horaires<i class="bi bi-arrow-up-right fs-5 mx-1"></i></h4>
         <ul class="list-unstyled">
           <li><span class="fw-bold">Lundi - Vendredi:</span> 9h00 - 20h00</li>
           <li><span class="fw-bold">Samedi:</span> 10h00 - 22h00</li>
@@ -362,7 +363,7 @@
       </div>
 
       <div class="col-md-3">
-        <h4>Réseaux Sociaux</h4>
+        <h4>Réseaux Sociaux<i class="bi bi-arrow-up-right fs-5 mx-1"></i></h4>
         <div class="social-icons">
           <!-- Ajoutez d'autres icônes de réseaux sociaux si nécessaire -->
           <a href="#"><img src="./images/Facebook_footer_icon.svg" alt="facebook icon"></a>
@@ -373,7 +374,7 @@
       </div>
 
       <div class="col-md-3">
-        <h4>Contact</h4>
+        <h4>Contact<i class="bi bi-arrow-up-right fs-5 mx-1"></i></h4>
         <ul class="list-unstyled">
           <li><span class="fw-bold">Téléphone:</span> +123456789</li>
           <li><span class="fw-bold">Email:</span> example@example.com</li>
@@ -416,6 +417,7 @@
     </div>
   </div>
 </div>
+
 
 
 <!-- FAVOSRIS -->

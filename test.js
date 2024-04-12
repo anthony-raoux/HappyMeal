@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", function() {
         fetch('data.json')
             .then(response => response.json())
             .then(data => {
-                const recette = data.recettes.find(recette => recette.nom === nomRecette);
+                // Chercher la recette spécifique
+                const recette = data.recettes.find(recette => recette.nom === nomRecette || recette.ingredients.some(ingredient => ingredient.nom === nomRecette));
                 if (recette) {
                     afficherRecette(recette);
                 } else {
@@ -26,23 +27,40 @@ document.addEventListener("DOMContentLoaded", function() {
         window.location.href = `recette.html?${params.toString()}`;
     }
 
-    // Fonction pour afficher les résultats filtrés dans la liste déroulante
+    // Fonction pour afficher les résultats filtrés dans la liste déroulante ----> Bar de recherche
     function afficherResultatsFiltres(recettes) {
         const autocompleteContainer = document.getElementById('autocompleteContainer');
         autocompleteContainer.innerHTML = '';
-        recettes.sort((a, b) => a.nom.localeCompare(b.nom)).forEach(recette => {
-            const listItem = document.createElement('a');
-            listItem.classList.add('list-group-item');
-            listItem.href = '#';
-            listItem.textContent = recette.nom;
-            listItem.dataset.id = recette.id;
-            listItem.addEventListener('click', function() {
-                chargerRecette(recette.nom);
+    
+        // Regrouper les recettes par la première lettre de leur nom
+        const recettesParLettre = {};
+        recettes.forEach(recette => {
+            const premiereLettre = recette.nom.charAt(0).toUpperCase();
+            if (!recettesParLettre[premiereLettre]) {
+                recettesParLettre[premiereLettre] = [];
+            }
+            recettesParLettre[premiereLettre].push(recette);
+        });
+    
+        // Trier chaque groupe de recettes par leur nom
+        Object.keys(recettesParLettre).sort().forEach(lettre => {
+            const recettesDansLettre = recettesParLettre[lettre];
+            recettesDansLettre.sort((a, b) => a.nom.localeCompare(b.nom));
+            recettesDansLettre.forEach((recette, index) => {
+                const listItem = document.createElement('a');
+                listItem.classList.add('list-group-item');
+                listItem.href = '#';
+                listItem.textContent = recette.nom;
+                listItem.dataset.id = recette.id;
+                listItem.addEventListener('click', function() {
+                    chargerRecette(recette.nom);
+                });
+    
+                autocompleteContainer.appendChild(listItem);
             });
-
-            autocompleteContainer.appendChild(listItem);
         });
     }
+    
 
     // Fonction pour gérer l'ajout ou la suppression d'une recette aux favoris
     function toggleFavorite(buttonId, recetteNom) {
@@ -90,27 +108,27 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Écoute des événements de saisie dans la barre de recherche
-    const input = document.getElementById('myInput');
-const searchMessage = document.getElementById('searchMessage');
+            const input = document.getElementById('myInput');
+        const searchMessage = document.getElementById('searchMessage');
 
-input.addEventListener('input', function(event) {
-    const searchTerm = event.target.value.trim().toLowerCase();
-    if (searchTerm.length > 0) {
-        searchMessage.style.display = 'none';
-    } else {
-        searchMessage.style.display = 'block';
-    }
+        input.addEventListener('input', function(event) {
+            const searchTerm = event.target.value.trim().toLowerCase();
+            if (searchTerm.length > 0) {
+                searchMessage.style.display = 'none';
+            } else {
+                searchMessage.style.display = 'block';
+            }
 
-    fetch('data.json')
-        .then(response => response.json())
-        .then(data => {
-            const filteredRecettes = data.recettes.filter(recette =>
-                recette.nom.toLowerCase().includes(searchTerm)
-            );
-            afficherResultatsFiltres(filteredRecettes);
-        })
-        .catch(error => console.error('Erreur lors de la récupération des données JSON :', error));
-});
+            fetch('data.json')
+                .then(response => response.json())
+                .then(data => {
+                    const filteredRecettes = data.recettes.filter(recette =>
+                        recette.nom.toLowerCase().includes(searchTerm)
+                    );
+                    afficherResultatsFiltres(filteredRecettes);
+                })
+                .catch(error => console.error('Erreur lors de la récupération des données JSON :', error));
+        });
 
     
 
