@@ -13,7 +13,35 @@
   <style> .nav-item:hover {
     background-color: #F5DDC4;
     border-radius: 5px;
-  } </style>
+  } 
+
+  
+
+.parallax {
+    position: relative;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 25vh;
+  }
+  .parallax-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Couleur de l'overlay */
+  }
+  .parallax-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 50px 0;
+    color: white;
+  }
+  
+  </style>
     <header>
         <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top bg-body-tertiary">
@@ -70,6 +98,78 @@
         </div>
     </div>
     
+     <!-- Section 4: Parcourez toutes les recettes -->
+  <section>
+    <div class="parallax mt-5" style="background-image: url('./images/partage.jpeg');">
+      <div class="parallax-overlay"></div>
+      <div class="container parallax-content">
+        <h1 class="text-center text-tangerin">Contactez-nous</h1>
+        <p class="text-center fs-4 text-tangerine-light" style="font-size: 16px;">Chez Happy Meal, nous croyons en la magie de la diversité. Notre restaurant est un lieu où chacun est accueilli tel qu'il est, sans jugement. Que vous soyez en costume-cravate ou en t-shirt et jeans, vous êtes toujours le bienvenu à notre table.</p>
+      </div>
+    </div>
+  </section>
+
+</body>
+
+
+<footer class="my-5" style="height: 25vh;">
+  <div class="container">
+    <div class="row text-center">
+
+
+      <div class="col-md-3">
+        <h4>Liens de Navigations<i class="bi bi-arrow-up-right fs-5 mx-1"></i></h4>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Recettes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Favoris</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-3">
+        <h4>Horaires<i class="bi bi-arrow-up-right fs-5 mx-1"></i></h4>
+        <ul class="list-unstyled">
+          <li><span class="fw-bold">Lundi - Vendredi:</span> 9h00 - 20h00</li>
+          <li><span class="fw-bold">Samedi:</span> 10h00 - 22h00</li>
+          <li><span class="fw-bold">Dimanche:</span> Fermé</li>
+        </ul>
+      </div>
+
+      <div class="col-md-3">
+        <h4>Réseaux Sociaux<i class="bi bi-arrow-up-right fs-5 mx-1"></i></h4>
+        <div class="social-icons">
+          <!-- Ajoutez d'autres icônes de réseaux sociaux si nécessaire -->
+          <a href="#"><img src="./images/Facebook_footer_icon.svg" alt="facebook icon"></a>
+          <a href="#"><img src="./images/Instagram_footer_icon.svg" alt="instagram icon"></a>
+          <a href="#"><img src="./images/Linkind_footer_icon.svg" alt="linkedin icon"></a>
+          <a href="#"><img src="./images/X (twiter).svg" alt="x icon"></a>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <h4>Contact<i class="bi bi-arrow-up-right fs-5 mx-1"></i></h4>
+        <ul class="list-unstyled">
+          <li><span class="fw-bold">Téléphone:</span> +123456789</li>
+          <li><span class="fw-bold">Email:</span> example@example.com</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container-fluid p-5">
+    <div class="border-top border-dark-subtle">
+      <div class="text-center m-3">Tout droit @Happy Meal 2024</div>
+    </div>
+  </div>
+</footer>
+
       
 <!-- Modal de recherche -->
 <div class="modal fade" id="modalDeRecherche" tabindex="-1" aria-labelledby="recherche_modal" aria-hidden="true">
