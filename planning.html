@@ -141,27 +141,52 @@
   <!-- Bootstrap JS (optionnel si vous n'utilisez pas de fonctionnalités JavaScript) -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
-    // Récupérer les recettes favorites depuis le stockage local
-    const recipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-
-    // Fonction pour ajouter les options de recettes aux menus déroulants
-    function populateRecipes() {
+    // Fonction pour récupérer les recettes favorites du stockage local et les ajouter aux options du planning des repas
+    function addFavoriteRecipesToPlanning() {
+      // Récupérer les recettes favorites depuis le stockage local
+      const favoriteRecipes = JSON.parse(localStorage.getItem('favorites')) || [];
+  
+      // Sélectionner les menus déroulants pour chaque jour de la semaine
       const selectElements = document.querySelectorAll('select');
+  
+      // Parcourir chaque menu déroulant et ajouter les recettes favorites comme options
       selectElements.forEach(select => {
-        recipes.forEach(recipe => {
-          const option = document.createElement('option');
-          option.textContent = recipe;
-          select.appendChild(option);
+        // Vider les options existantes du menu déroulant
+        select.innerHTML = '';
+  
+        // Ajouter une option par défaut
+        const defaultOption = document.createElement('option');
+        defaultOption.textContent = 'Choisissez une recette...';
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        select.appendChild(defaultOption);
+  
+        // Ajouter les recettes favorites comme options
+        favoriteRecipes.forEach(recipe => {
+          // Vérifier si l'élément est un objet
+          if (typeof recipe === 'object' && recipe !== null) {
+            // Extraire le nom de la recette de l'objet
+            const recipeName = recipe.name; // Assurez-vous d'ajuster la propriété en fonction de la structure de vos objets recette
+            // Créer une option avec le nom de la recette
+            const option = document.createElement('option');
+            option.textContent = recipeName;
+            select.appendChild(option);
+          } else {
+            // Si ce n'est pas un objet, ajouter simplement la valeur comme option
+            const option = document.createElement('option');
+            option.textContent = recipe;
+            select.appendChild(option);
+          }
         });
       });
     }
-
-    // Remplir les menus déroulants avec les recettes favorites
-    populateRecipes();
-
-    // Fonction pour sauvegarder la planification dans le stockage local
-    function savePlan() {
-      const plan = {
+  
+    // Appeler la fonction pour ajouter les recettes favorites au planning des repas
+    addFavoriteRecipesToPlanning();
+  
+    // Ajouter un gestionnaire d'événements pour le bouton d'enregistrement
+    document.getElementById('saveBtn').addEventListener('click', function() {
+      const selectedRecipes = {
         lundi: document.getElementById('lundi').value,
         mardi: document.getElementById('mardi').value,
         mercredi: document.getElementById('mercredi').value,
@@ -170,12 +195,10 @@
         samedi: document.getElementById('samedi').value,
         dimanche: document.getElementById('dimanche').value
       };
-      localStorage.setItem('mealPlan', JSON.stringify(plan));
-      alert('Planification des repas enregistrée avec succès !');
-    }
-
-    // Écouter le clic sur le bouton "Enregistrer la planification"
-    document.getElementById('saveBtn').addEventListener('click', savePlan);
+      
+      localStorage.setItem('planning', JSON.stringify(selectedRecipes));
+      alert('La planification des repas a été enregistrée avec succès!');
+    });
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

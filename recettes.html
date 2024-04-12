@@ -536,39 +536,53 @@
 </div>
 
 
+
 <script>
+ document.addEventListener("DOMContentLoaded", function() {
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-document.addEventListener("DOMContentLoaded", function() {
-    const addToFavoritesBtns = document.querySelectorAll('.addToFavoritesBtn');
-    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  function addToFavorites(event) {
+    const card = event.target.closest('.card');
+    const cardId = card.getAttribute('data-card-id');
+    const recipeName = card.querySelector('.card-title').textContent;
+    const imageUrl = card.querySelector('.card-img-top').getAttribute('src');
+    const index = favorites.findIndex(recipe => recipe.cardId === cardId);
 
-    addToFavoritesBtns.forEach(function(btn) {
-        const cardId = btn.closest('.card').getAttribute('data-card-id');
-        if (favorites.includes(cardId)) {
-            btn.classList.add('text-warning');
-        }
-        btn.addEventListener('click', addToFavorites);
-    });
-
-    function addToFavorites(event) {
-        const card = event.target.closest('.card');
-        const cardId = card.getAttribute('data-card-id');
-        const index = favorites.indexOf(cardId);
-
-        if (index === -1) {
-            favorites.push(cardId);
-            event.target.classList.add('text-warning');
-        } else {
-            favorites.splice(index, 1);
-            event.target.classList.remove('text-warning');
-        }
-
-        localStorage.setItem('favorites', JSON.stringify(favorites));
+    if (index === -1) {
+      favorites.push({ cardId, name: recipeName, imageUrl });
+      event.target.classList.remove('bi-star');
+      event.target.classList.add('bi-star-fill', 'text-danger');
+    } else {
+      favorites.splice(index, 1);
+      event.target.classList.remove('bi-star-fill', 'text-danger');
+      event.target.classList.add('bi-star');
     }
+
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }
+
+  const addToFavoritesButtons = document.querySelectorAll('.addToFavoritesBtn');
+  addToFavoritesButtons.forEach(button => {
+    button.addEventListener('click', addToFavorites);
+  });
+
+  favorites.forEach(function(recipe) {
+    // Pour chaque recette favorite, vous pouvez créer un élément de recette
+    const recipeCard = document.createElement('div');
+    recipeCard.classList.add('card');
+    recipeCard.innerHTML = `
+      <img src="${recipe.imageUrl}" class="card-img-top" alt="${recipe.name}">
+      <div class="card-body">
+        <h5 class="card-title">${recipe.name}</h5>
+        <p class="card-text">Détails de la recette...</p>
+      </div>
+    `;
+    favoritesContainer.appendChild(recipeCard);
+  });
 });
 
-        
 </script>
+
 
   <!-- Bootstrap JavaScript et dépendances -->
   
